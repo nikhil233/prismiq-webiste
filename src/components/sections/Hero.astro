@@ -108,29 +108,62 @@ const pathD = (i: number) => {
             </div>
             <div class="engine-orb">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="brain-hl" x1="10" y1="12" x2="32" y2="48" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#EFF6FF"/>
+                    <stop offset="100%" stop-color="#BFDBFE"/>
+                  </linearGradient>
+                  <linearGradient id="brain-hr" x1="54" y1="12" x2="32" y2="48" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#DBEAFE"/>
+                    <stop offset="100%" stop-color="#93C5FD" stop-opacity="0.55"/>
+                  </linearGradient>
+                  <path id="npl" d="M20 20 L14 30 L20 42"/>
+                  <path id="npr" d="M44 20 L50 30 L44 42"/>
+                </defs>
                 <!-- Left hemisphere -->
-                <path d="M32 11 C32 11 24 10 18.5 15 C13 20 11 26 11 31 C11 36 13 40 17 43 C20 45.5 24.5 47 29 47 L32 47 L32 11Z"
-                      fill="#DBEAFE" stroke="#1E40AF" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M32 12 C29 11 25 10 21 11.5 C16 13 12 17.5 10.5 23 C9 28.5 10 34.5 13 39 C16 43 21 46.5 27 47 L32 47 Z"
+                      fill="url(#brain-hl)" stroke="#1E40AF" stroke-width="1.5" stroke-linejoin="round"/>
                 <!-- Right hemisphere -->
-                <path d="M32 11 C32 11 40 10 45.5 15 C51 20 53 26 53 31 C53 36 51 40 47 43 C44 45.5 39.5 47 35 47 L32 47 L32 11Z"
-                      fill="#EFF6FF" stroke="#1E40AF" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M32 12 C35 11 39 10 43 11.5 C48 13 52 17.5 53.5 23 C55 28.5 54 34.5 51 39 C48 43 43 46.5 37 47 L32 47 Z"
+                      fill="url(#brain-hr)" stroke="#1E40AF" stroke-width="1.5" stroke-linejoin="round"/>
                 <!-- Center fissure -->
-                <line x1="32" y1="11" x2="32" y2="47" stroke="#93C5FD" stroke-width="1"/>
+                <line x1="32" y1="12" x2="32" y2="47" stroke="#93C5FD" stroke-width="0.75" stroke-dasharray="2 2.5"/>
                 <!-- Left sulci -->
-                <path d="M15 23 Q20 19 22 25" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-                <path d="M13 33 Q18 29 20 36" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-                <path d="M15 41 Q19 38 22 42" stroke="#1D4ED8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M13 22 Q17.5 18 20.5 23" stroke="#3B82F6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M11 32 Q16 27.5 18.5 33" stroke="#3B82F6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M13 41 Q17 37.5 20 41.5" stroke="#1D4ED8" stroke-width="1.1" stroke-linecap="round" fill="none"/>
                 <!-- Right sulci -->
-                <path d="M49 23 Q44 19 42 25" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-                <path d="M51 33 Q46 29 44 36" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-                <path d="M49 41 Q45 38 42 42" stroke="#1D4ED8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M51 22 Q46.5 18 43.5 23" stroke="#3B82F6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M53 32 Q48 27.5 45.5 33" stroke="#3B82F6" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M51 41 Q47 37.5 44 41.5" stroke="#1D4ED8" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+                <!-- Neural connection lines -->
+                <line x1="20" y1="20" x2="14" y2="30" stroke="#BFDBFE" stroke-width="0.8"/>
+                <line x1="14" y1="30" x2="20" y2="42" stroke="#BFDBFE" stroke-width="0.8"/>
+                <line x1="44" y1="20" x2="50" y2="30" stroke="#BFDBFE" stroke-width="0.8"/>
+                <line x1="50" y1="30" x2="44" y2="42" stroke="#BFDBFE" stroke-width="0.8"/>
+                <!-- Neural nodes -->
+                <circle cx="20" cy="20" r="2.2" fill="#3B82F6" class="neural-dot" style="animation-delay:0s"/>
+                <circle cx="14" cy="30" r="2.2" fill="#1E40AF" class="neural-dot" style="animation-delay:0.42s"/>
+                <circle cx="20" cy="42" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.84s"/>
+                <circle cx="44" cy="20" r="2.2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.21s"/>
+                <circle cx="50" cy="30" r="2.2" fill="#1E40AF" class="neural-dot" style="animation-delay:0.63s"/>
+                <circle cx="44" cy="42" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:1.05s"/>
+                <!-- Traveling signal — left side -->
+                <circle r="1.8" fill="#60A5FA">
+                  <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s" calcMode="linear">
+                    <mpath href="#npl"/>
+                  </animateMotion>
+                  <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.08;0.88;1" dur="2.2s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Traveling signal — right side -->
+                <circle r="1.8" fill="#60A5FA">
+                  <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s" calcMode="linear">
+                    <mpath href="#npr"/>
+                  </animateMotion>
+                  <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.08;0.88;1" dur="2.2s" repeatCount="indefinite"/>
+                </circle>
                 <!-- Brain stem -->
-                <path d="M27 47 C27 51 37 51 37 47" stroke="#1E40AF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                <!-- Neural pulse dots -->
-                <circle cx="19" cy="21" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0s"/>
-                <circle cx="13" cy="31" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.5s"/>
-                <circle cx="45" cy="21" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.25s"/>
-                <circle cx="51" cy="31" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.75s"/>
+                <path d="M27.5 47 C27 51.5 37 51.5 36.5 47" stroke="#1E40AF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
               </svg>
             </div>
             <p class="engine-title">Revenue Intelligence Engine</p>
@@ -148,51 +181,119 @@ const pathD = (i: number) => {
           <polygon points="62,24 70,28 62,32" fill="#3B82F6" opacity="0.8" />
         </svg>
 
-        <!-- Col 5: Output card -->
-        <div class="output-card">
-          <div class="oc-header">
-            <span class="oc-title">Pipeline Intelligence</span>
-            <span class="oc-live">● Live</span>
-          </div>
-          <div class="oc-deals">
-            <div class="oc-deal">
-              <div class="oc-deal-info">
-                <div class="oc-deal-name">Acme Corp</div>
-                <div class="oc-deal-meta">Proposal · 9d ago</div>
+        <!-- Col 5: Output carousel -->
+        <div class="oc-wrap" id="hero-oc" role="region" aria-label="Capability showcase">
+          <div class="oc-track">
+
+            <!-- Slide 0: Deal Intelligence -->
+            <div class="oc-slide active">
+              <div class="oc-header">
+                <span class="oc-title">Deal Intelligence</span>
+                <span class="oc-live">● Live</span>
               </div>
-              <div class="oc-deal-right">
-                <div class="oc-deal-val">$48k</div>
-                <span class="oc-badge oc-red">At Risk</span>
+              <div class="oc-items">
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Indus Fintech</span>
+                    <span class="oc-badge oc-red">At Risk</span>
+                  </div>
+                  <div class="oc-item-insight">No follow-up since quote sent Jun 4 — prospect going cold</div>
+                  <div class="oc-item-action">→ Send a "still interested?" note today</div>
+                </div>
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Nexora Solutions</span>
+                    <span class="oc-badge oc-amber">Needs Attn</span>
+                  </div>
+                  <div class="oc-item-insight">Pricing deck opened 3× — decision-maker not yet looped in</div>
+                  <div class="oc-item-action">→ Ask for intro to VP before end of week</div>
+                </div>
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Kalpana Systems</span>
+                    <span class="oc-badge oc-red">Stalled</span>
+                  </div>
+                  <div class="oc-item-insight">Champion went silent after legal review — 12 days no reply</div>
+                  <div class="oc-item-action">→ Send ROI case study to re-engage legal team</div>
+                </div>
               </div>
             </div>
-            <div class="oc-deal">
-              <div class="oc-deal-info">
-                <div class="oc-deal-name">Brightwave</div>
-                <div class="oc-deal-meta">Demo · 5d ago</div>
+
+            <!-- Slide 1: Commitment Tracker -->
+            <div class="oc-slide">
+              <div class="oc-header">
+                <span class="oc-title">Commitment Tracker</span>
+                <span class="oc-live oc-live-amber">● 2 Due Soon</span>
               </div>
-              <div class="oc-deal-right">
-                <div class="oc-deal-val">$22.5k</div>
-                <span class="oc-badge oc-amber">Needs Attn</span>
+              <div class="oc-items">
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Indus Fintech</span>
+                    <span class="oc-badge oc-red">Overdue</span>
+                  </div>
+                  <div class="oc-item-insight">"You'll intro me to the CTO by Friday" — from Jun 12 call</div>
+                  <div class="oc-item-action">→ Follow up on CTO introduction now</div>
+                </div>
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Nexora Solutions</span>
+                    <span class="oc-badge oc-amber">Due today</span>
+                  </div>
+                  <div class="oc-item-insight">"Send updated pricing within 3 days" — from Jun 10 call</div>
+                  <div class="oc-item-action">→ Send revised quote before 5 PM</div>
+                </div>
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Kalpana Systems</span>
+                    <span class="oc-badge oc-green">On track</span>
+                  </div>
+                  <div class="oc-item-insight">"Pilot sign-off by Jun 20" — from Jun 9 call</div>
+                  <div class="oc-item-action">→ Confirm pilot kickoff agenda for Jun 21</div>
+                </div>
               </div>
             </div>
-            <div class="oc-deal">
-              <div class="oc-deal-info">
-                <div class="oc-deal-name">Zenith Labs</div>
-                <div class="oc-deal-meta">Negotiation · 12d ago</div>
+
+            <!-- Slide 2: Call Coaching -->
+            <div class="oc-slide">
+              <div class="oc-header">
+                <span class="oc-title">Call Coaching</span>
+                <span class="oc-week-badge">From this week's calls</span>
               </div>
-              <div class="oc-deal-right">
-                <div class="oc-deal-val">$91k</div>
-                <span class="oc-badge oc-red">At Risk</span>
+              <div class="oc-items">
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Kavya R.</span>
+                    <span class="oc-badge oc-amber">Coach</span>
+                  </div>
+                  <div class="oc-item-insight">Talk ratio 78% across 8 calls — not leaving room for prospect</div>
+                  <div class="oc-item-action">→ Share active listening framework before next call</div>
+                </div>
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Rohit M.</span>
+                    <span class="oc-badge oc-green">Strong</span>
+                  </div>
+                  <div class="oc-item-insight">Best discovery questions on team — weak on closing sequences</div>
+                  <div class="oc-item-action">→ Review closing scripts ahead of Kalpana call Friday</div>
+                </div>
+                <div class="oc-item">
+                  <div class="oc-item-top">
+                    <span class="oc-item-name">Sneha P.</span>
+                    <span class="oc-badge oc-red">Gap</span>
+                  </div>
+                  <div class="oc-item-insight">No confirmed next step in 4 of 7 calls this week</div>
+                  <div class="oc-item-action">→ Always lock a date before ending the call</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="oc-action">
-            <div class="oc-action-label">AI Next Action</div>
-            <div class="oc-action-text">→ Follow up Acme Corp — quote promised June 4 not sent</div>
-          </div>
-          <div class="oc-stat">
-            <span class="oc-stat-num">$161k</span>
-            <span class="oc-stat-label">at risk this week</span>
+
+          </div><!-- /oc-track -->
+
+          <!-- Dot nav -->
+          <div class="oc-dots">
+            <button class="oc-dot active" data-idx="0" aria-label="Revenue Command Center"></button>
+            <button class="oc-dot" data-idx="1" aria-label="Attention Engine"></button>
+            <button class="oc-dot" data-idx="2" aria-label="Team Performance"></button>
           </div>
         </div>
 
@@ -286,6 +387,7 @@ const pathD = (i: number) => {
     min-width: 0;
   }
   .waitlist-input::placeholder { color: #94A3B8; }
+  .hero-waitlist:focus-within { animation: none; opacity: 1; transform: none; }
   .waitlist-btn {
     background: #1E40AF;
     color: white;
@@ -325,10 +427,10 @@ const pathD = (i: number) => {
   }
   .dataflow {
     display: grid;
-    grid-template-columns: 242px 130px 220px 80px 240px;
+    grid-template-columns: 242px 130px 220px 80px 300px;
     align-items: center;
     gap: 0;
-    min-width: 848px;
+    min-width: 972px;
   }
 
   .tools-col {
@@ -449,21 +551,61 @@ const pathD = (i: number) => {
     padding: 3px 8px; text-align: center; white-space: nowrap;
   }
 
-  .output-card {
+  /* ---- Output carousel ---- */
+  .oc-wrap {
     background: white;
     border: 1px solid #E2E8F0;
     border-radius: 14px;
-    padding: 14px;
-    box-shadow: 0 8px 32px rgba(30, 64, 175, 0.10), 0 2px 8px rgba(0,0,0,0.05);
+    padding: 14px 14px 10px;
+    box-shadow: 0 8px 32px rgba(30,64,175,0.10), 0 2px 8px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    gap: 8px;
     animation: floatCard 4s ease-in-out infinite;
+    min-width: 0;
   }
   @keyframes floatCard {
     0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-5px); }
   }
+  .oc-track { position: relative; flex: 1; }
+  .oc-slide { display: none; flex-direction: column; gap: 8px; }
+  .oc-slide.active { display: flex; animation: ocFadeIn 0.35s ease; }
+  @keyframes ocFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  /* Dot nav */
+  .oc-dots { display: flex; justify-content: center; gap: 5px; margin-top: 10px; padding-top: 8px; border-top: 1px solid #F1F5F9; }
+  .oc-dot {
+    width: 6px; height: 6px; border-radius: 3px;
+    background: #E2E8F0; border: none; cursor: pointer; padding: 0;
+    transition: background 0.2s, width 0.25s;
+  }
+  .oc-dot.active { background: #1E40AF; width: 18px; }
+  /* Shared item rows (all 3 slides) */
+  .oc-items { display: flex; flex-direction: column; gap: 6px; }
+  .oc-item {
+    background: #F8FAFC; border: 1px solid #E2E8F0;
+    border-radius: 9px; padding: 8px 10px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .oc-item-top { display: flex; align-items: center; justify-content: space-between; }
+  .oc-item-name { font-size: 10.5px; font-weight: 700; color: #0F172A; }
+  .oc-item-insight { font-size: 9px; color: #64748B; line-height: 1.45; }
+  .oc-item-action { font-size: 9px; font-weight: 600; color: #1E40AF; }
+  /* Team slide */
+  .oc-team { display: flex; flex-direction: column; gap: 6px; }
+  .oc-rep { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 8px; }
+  .oc-rep-left { flex: 1; min-width: 0; }
+  .oc-rep-name { font-size: 10px; font-weight: 600; color: #0F172A; margin-bottom: 4px; }
+  .oc-bar-track { height: 4px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
+  .oc-bar-fill { height: 100%; background: #10B981; border-radius: 99px; }
+  .oc-bar-low { background: #F59E0B; }
+  .oc-bar-mid { background: #3B82F6; }
+  /* Extra badge colours */
+  .oc-green { background: #ECFDF5; color: #059669; }
+  .oc-live-amber { background: #FFFBEB !important; color: #D97706 !important; }
+  .oc-week-badge { font-size: 9px; font-weight: 600; background: #F1F5F9; color: #64748B; padding: 2px 6px; border-radius: 99px; }
 
   .oc-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 7px; border-bottom: 1px solid #F1F5F9; }
   .oc-title { font-size: 11px; font-weight: 600; color: #0F172A; }
@@ -534,7 +676,7 @@ const pathD = (i: number) => {
     .hero-sub { max-width: 100%; }
     .hero-waitlist { max-width: 100%; }
     .df-outer { max-width: 100%; }
-    .dataflow { min-width: 912px; }
+    .dataflow { min-width: 972px; }
   }
 
   /* ── Mobile (< 768px) ── */
@@ -586,7 +728,7 @@ const pathD = (i: number) => {
     .left-svg   { display: none; }
     .engine-wrap { display: none; }
     .right-svg  { display: none; }
-    .output-card {
+    .oc-wrap {
       width: 100%;
       max-width: 380px;
       margin: 0 auto;
@@ -605,3 +747,28 @@ const pathD = (i: number) => {
     }
   }
 </style>
+
+<script>
+  (() => {
+    const wrap = document.getElementById('hero-oc');
+    if (!wrap) return;
+    const slides = wrap.querySelectorAll('.oc-slide');
+    const dots   = wrap.querySelectorAll('.oc-dot');
+    let cur = 0, timer: ReturnType<typeof setInterval> | null = null;
+
+    function goTo(n: number) {
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = ((n % slides.length) + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+    }
+    function start() { timer = setInterval(() => goTo(cur + 1), 3500); }
+    function stop()  { if (timer) clearInterval(timer); }
+
+    dots.forEach((d, i) => d.addEventListener('click', () => { stop(); goTo(i); start(); }));
+    wrap.addEventListener('mouseenter', stop);
+    wrap.addEventListener('mouseleave', start);
+    start();
+  })();
+</script>
