@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import IntegrationBar from '../components/sections/IntegrationBar.astro';
+import BrutalTruth from '../components/sections/BrutalTruth.astro';
+import WhyToolsFail from '../components/sections/WhyToolsFail.astro';
+import IntroducingPrismiq from '../components/sections/IntroducingPrismiq.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import QuestionsAnswered from '../components/sections/QuestionsAnswered.astro';
+import PersonaTabs from '../components/sections/PersonaTabs';
+import WhatYouStopDoing from '../components/sections/WhatYouStopDoing.astro';
+import TheVision from '../components/sections/TheVision.astro';
+import DesignPartnerCTA from '../components/sections/DesignPartnerCTA.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout>
+  <Nav />
+  <main>
+    <Hero />
+    <IntegrationBar />
+    <BrutalTruth />
+    <WhyToolsFail />
+    <IntroducingPrismiq />
+    <HowItWorks />
+    <QuestionsAnswered />
+    <PersonaTabs client:visible />
+    <WhatYouStopDoing />
+    <TheVision />
+    <DesignPartnerCTA />
+  </main>
+  <Footer />
+</BaseLayout>

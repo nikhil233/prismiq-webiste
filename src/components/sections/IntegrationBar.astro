@@ -1,0 +1,133 @@
+---
+const integrations = [
+  { name: 'HubSpot',     color: '#FF7A59', letter: 'H' },
+  { name: 'Zoho CRM',   color: '#E42527', letter: 'Z' },
+  { name: 'Salesforce', color: '#00A1E0', letter: 'S' },
+  { name: 'Fireflies',  color: '#EF4444', letter: 'F' },
+  { name: 'Gong',       color: '#1A1A1A', letter: 'G' },
+  { name: 'Slack',      color: '#4A154B', letter: 'S' },
+  { name: 'Gmail',      color: '#EA4335', letter: 'M' },
+  { name: 'MS Teams',   color: '#5B5EA6', letter: 'T' },
+];
+---
+
+<section id="integrations" class="integration-section">
+  <p class="integration-label">Works with the tools your team already uses</p>
+
+  <div class="logo-row">
+    {integrations.map((i, idx) => (
+      <div
+        class="logo-chip"
+        style={`animation-delay: ${0.05 * idx}s`}
+      >
+        <span
+          class="logo-dot"
+          style={`background: ${i.color}; color: white;`}
+        >
+          {i.letter}
+        </span>
+        <span class="logo-name">{i.name}</span>
+      </div>
+    ))}
+  </div>
+
+  <p class="integration-stat">12+ integrations · 30-minute setup · No CRM migration required</p>
+</section>
+
+<style>
+  .integration-section {
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .integration-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94A3B8;
+    margin: 0 0 1.5rem;
+  }
+
+  .logo-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #E2E8F0;
+    border-radius: 99px;
+    padding: 7px 14px 7px 8px;
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: #334155;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    opacity: 0;
+    animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .logo-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30,64,175,0.08);
+  }
+
+  .logo-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-name { white-space: nowrap; }
+
+  .integration-stat {
+    font-size: 0.8rem;
+    color: #94A3B8;
+    margin: 0;
+  }
+
+  @keyframes popIn {
+    from {
+      opacity: 0;
+      transform: scale(0.85) translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll('.logo-chip');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.animationPlayState = 'running';
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  chips.forEach(chip => {
+    (chip as HTMLElement).style.animationPlayState = 'paused';
+    observer.observe(chip);
+  });
+</script>

@@ -1,0 +1,186 @@
+---
+const pains = [
+  {
+    icon: '🌑',
+    title: 'Deals going dark',
+    desc: "3 of your top opportunities haven't been touched in 10 days. Nobody flagged it.",
+    accent: '#EF4444',
+    tag: 'Revenue at Risk',
+    tagColor: 'red',
+  },
+  {
+    icon: '📭',
+    title: 'Missed follow-ups',
+    desc: 'The rep meant to send that email. They got busy. The prospect moved on.',
+    accent: '#F59E0B',
+    tag: 'Happens Every Week',
+    tagColor: 'amber',
+  },
+  {
+    icon: '🙈',
+    title: 'Flying blind into calls',
+    desc: "Salesforce shows the stage. Not what was promised on the last call — or what they're worried about.",
+    accent: '#EF4444',
+    tag: 'Kills Momentum',
+    tagColor: 'red',
+  },
+  {
+    icon: '🎲',
+    title: 'Forecasting by gut',
+    desc: "Your manager asks 'how's the quarter?' Your best answer is 'I think we're fine.'",
+    accent: '#F59E0B',
+    tag: 'Costs Quarters',
+    tagColor: 'amber',
+  },
+];
+---
+
+<section class="brutal-section" data-reveal>
+  <div class="content-width brutal-inner">
+
+    <div class="brutal-header reveal-item">
+      <h2 class="brutal-h2">
+        This is what your week<br />
+        <span style="color: #1E40AF">actually looks like.</span>
+      </h2>
+      <p class="brutal-sub">
+        Every sales team we talk to recognises all four of these. Every single one.
+      </p>
+    </div>
+
+    <div class="brutal-grid">
+      {pains.map((p, i) => (
+        <div
+          class="pain-card reveal-item"
+          style={`--accent: ${p.accent}; animation-delay: ${0.1 + i * 0.1}s`}
+        >
+          <div class="pain-top">
+            <span class="pain-icon">{p.icon}</span>
+            <span class={`pain-tag ${p.tagColor}`}>{p.tag}</span>
+          </div>
+          <h3 class="pain-title">{p.title}</h3>
+          <p class="pain-desc">{p.desc}</p>
+          <div class="pain-accent-bar"></div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .brutal-section {
+    background: white;
+    padding: 6rem 1.5rem;
+  }
+  .brutal-inner { max-width: 1280px; margin: auto; }
+
+  .brutal-header {
+    max-width: 640px;
+    margin-bottom: 3rem;
+  }
+  .brutal-h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    margin: 0 0 1rem;
+  }
+  .brutal-sub {
+    font-size: 1.15rem;
+    color: #64748B;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .brutal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .pain-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    opacity: 0;
+  }
+  .pain-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+  }
+  .pain-accent-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 0 0 16px 16px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .pain-card:hover .pain-accent-bar { transform: scaleX(1); }
+
+  .pain-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .pain-icon { font-size: 1.75rem; }
+  .pain-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 99px;
+  }
+  .pain-tag.red { background: #FEF2F2; color: #DC2626; }
+  .pain-tag.amber { background: #FFFBEB; color: #D97706; }
+
+  .pain-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0F172A;
+    margin: 0 0 0.6rem;
+  }
+  .pain-desc {
+    font-size: 0.9rem;
+    color: #64748B;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Scroll reveal */
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .pain-card.visible { opacity: 1; }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => observer.observe(el));
+</script>

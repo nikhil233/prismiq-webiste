@@ -1,0 +1,100 @@
+---
+import Button from '../ui/Button.astro';
+
+const questions = [
+  { q: 'Which deals went cold this week?', a: 'Deals with no outbound contact in 7+ days, ranked by value at risk.' },
+  { q: "Who hasn't been followed up in 7 days?", a: 'Every open opportunity with no rep activity, flagged by stage and value.' },
+  { q: 'What was promised on the last call?', a: 'Commitments extracted from call transcripts, linked to CRM records.' },
+  { q: 'Which reps are behind on pipeline activity?', a: 'Activity-to-quota comparison across your team, updated daily.' },
+  { q: "What's actually at risk this quarter?", a: 'Deals scored for risk across engagement, recency, and stage velocity.' },
+  { q: 'Why did we lose that deal?', a: 'Loss pattern analysis across calls, email, and CRM — beyond "lost to competitor".' },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": questions.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section class="qa-section" data-reveal>
+  <div class="content-width">
+
+    <div class="qa-header reveal-item">
+      <h2 class="qa-h2">What does PrismIQ actually answer?</h2>
+      <p class="qa-sub">Questions your current stack can't answer without two hours of digging.</p>
+    </div>
+
+    <div class="qa-grid">
+      {questions.map((item, i) => (
+        <div class="qa-card reveal-item" style={`animation-delay:${0.05 + i*0.07}s`}>
+          <p class="qa-question">"{item.q}"</p>
+          <p class="qa-answer">{item.a}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="qa-cta reveal-item" style="animation-delay:0.5s">
+      <Button href="#design-partner" variant="primary">Join Waitlist</Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .qa-section { background: white; padding: 6rem 1.5rem; border-top: 1px solid #E2E8F0; }
+  .qa-header { max-width: 560px; margin-bottom: 3rem; }
+  .qa-h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #0F172A;
+    margin: 0 0 1rem;
+  }
+  .qa-sub { font-size: 1.1rem; color: #64748B; margin: 0; }
+
+  .qa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .qa-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .qa-card:hover {
+    border-color: #BFDBFE;
+    box-shadow: 0 4px 16px rgba(30,64,175,0.07);
+  }
+  .qa-question {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0F172A;
+    margin: 0 0 0.5rem;
+    line-height: 1.4;
+  }
+  .qa-answer { font-size: 0.85rem; color: #64748B; margin: 0; line-height: 1.55; }
+
+  .qa-cta { text-align: left; }
+
+  .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal-item.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const o = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+</script>

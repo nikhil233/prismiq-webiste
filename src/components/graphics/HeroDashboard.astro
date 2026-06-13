@@ -1,0 +1,378 @@
+---
+const deals = [
+  { name: 'Acme Corp', value: '$48,000', stage: 'Proposal', risk: 'high', last: '9 days ago', rep: 'SK', health: 28 },
+  { name: 'Brightwave', value: '$22,500', stage: 'Demo', risk: 'medium', last: '5 days ago', rep: 'JR', health: 55 },
+  { name: 'Zenith Labs', value: '$91,000', stage: 'Negotiation', risk: 'high', last: '12 days ago', rep: 'PM', health: 18 },
+];
+
+const pipeline = [
+  { stage: 'Prospecting', count: 18, value: '$240k', width: '85' },
+  { stage: 'Qualified', count: 12, value: '$180k', width: '65' },
+  { stage: 'Demo', count: 9, value: '$155k', width: '50' },
+  { stage: 'Proposal', count: 7, value: '$320k', width: '38' },
+  { stage: 'Negotiation', count: 3, value: '$140k', width: '20' },
+];
+
+const insights = [
+  { icon: '⚡', text: 'Acme Corp: competitor mentioned on last call', color: 'red' },
+  { icon: '📉', text: 'Q2 at risk: $340k without action this week', color: 'amber' },
+  { icon: '🏆', text: 'Top performer: Sarah closed 3 deals this month', color: 'green' },
+];
+---
+
+<!-- Browser chrome -->
+<div class="dashboard-wrap">
+  <!-- Window bar -->
+  <div class="win-bar">
+    <div class="dots">
+      <span class="dot red"></span>
+      <span class="dot amber"></span>
+      <span class="dot green"></span>
+    </div>
+    <div class="address-bar">app.prismiq.com/pipeline</div>
+    <div style="width:52px"></div>
+  </div>
+
+  <!-- Dashboard interior -->
+  <div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">PQ</div>
+      <nav class="sidebar-nav">
+        <a class="nav-item active" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Pipeline
+        </a>
+        <a class="nav-item" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.23-1.23a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          Calls
+        </a>
+        <a class="nav-item" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Insights
+        </a>
+        <a class="nav-item" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          Teams
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Col 1: Today's Focus -->
+    <section class="col">
+      <div class="col-header">
+        <span class="col-title">Today's Focus</span>
+        <span class="badge-live">● Live</span>
+      </div>
+      {deals.map((d, i) => (
+        <div class={`deal-card anim-in`} style={`animation-delay: ${0.6 + i * 0.12}s`}>
+          <div class="deal-top">
+            <div>
+              <div class="deal-name">{d.name}</div>
+              <div class="deal-meta">{d.stage} · {d.last}</div>
+            </div>
+            <div class="deal-right">
+              <div class="deal-value">{d.value}</div>
+              <span class={`risk-badge ${d.risk}`}>
+                {d.risk === 'high' ? 'At Risk' : 'Needs Attention'}
+              </span>
+            </div>
+          </div>
+          <div class="health-row">
+            <div class="health-bar">
+              <div class={`health-fill ${d.risk}`} style={`width: ${d.health}%`}></div>
+            </div>
+            <div class="rep-avatar">{d.rep}</div>
+          </div>
+        </div>
+      ))}
+      <div class="alert-card">
+        <span class="alert-dot"></span>
+        3 deals untouched for 7+ days
+      </div>
+    </section>
+
+    <!-- Col 2: Pipeline Health -->
+    <section class="col">
+      <div class="col-header">
+        <span class="col-title">Pipeline Health</span>
+        <span class="col-sub">Q2 · 17 days left</span>
+      </div>
+      <div class="pipeline-bars">
+        {pipeline.map((p, i) => (
+          <div class="pipe-row anim-in" style={`animation-delay: ${0.7 + i * 0.1}s`}>
+            <div class="pipe-label">
+              <span>{p.stage}</span>
+              <span class="pipe-count">{p.count}</span>
+            </div>
+            <div class="pipe-track">
+              <div class="pipe-fill" style={`width: ${p.width}%`}></div>
+            </div>
+            <span class="pipe-value">{p.value}</span>
+          </div>
+        ))}
+      </div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-num red">3</div>
+          <div class="stat-lbl">At Risk</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num amber">5</div>
+          <div class="stat-lbl">Need Attn</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num green">12</div>
+          <div class="stat-lbl">On Track</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Col 3: AI Insights -->
+    <section class="col">
+      <div class="col-header">
+        <span class="col-title">AI Insights</span>
+        <span class="insight-badge">3 new</span>
+      </div>
+      {insights.map((ins, i) => (
+        <div class={`insight-card anim-in`} style={`animation-delay: ${0.8 + i * 0.12}s`}>
+          <div class={`insight-icon ${ins.color}`}>{ins.icon}</div>
+          <p class="insight-text">{ins.text}</p>
+        </div>
+      ))}
+      <div class="next-action">
+        <div class="next-label">Suggested next action</div>
+        <div class="next-text">→ Follow up with Acme Corp — quote promised on June 4 not sent</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<style>
+  .dashboard-wrap {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 24px 64px rgba(30, 64, 175, 0.10), 0 4px 16px rgba(0,0,0,0.06);
+    overflow: hidden;
+    animation: floatCard 4s ease-in-out infinite;
+  }
+
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .win-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+  }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.red { background: #EF4444; }
+  .dot.amber { background: #F59E0B; }
+  .dot.green { background: #10B981; }
+  .address-bar {
+    font-size: 11px;
+    color: #94A3B8;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 3px 12px;
+  }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: 56px 1fr 1fr 1fr;
+    min-height: 320px;
+  }
+
+  .sidebar {
+    background: #0F172A;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .sidebar-logo {
+    width: 32px; height: 32px;
+    background: #1E40AF;
+    border-radius: 8px;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 4px;
+    border-radius: 8px;
+    color: #64748B;
+    text-decoration: none;
+    font-size: 8px;
+    transition: all 0.15s;
+  }
+  .nav-item.active { background: rgba(30,64,175,0.2); color: #93C5FD; }
+  .nav-item:hover { color: #CBD5E1; }
+
+  .col {
+    padding: 12px;
+    border-right: 1px solid #F1F5F9;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .col:last-child { border-right: none; }
+
+  .col-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .col-title { font-size: 11px; font-weight: 600; color: #0F172A; }
+  .col-sub { font-size: 10px; color: #94A3B8; }
+
+  .badge-live {
+    font-size: 9px;
+    font-weight: 600;
+    color: #10B981;
+    background: #ECFDF5;
+    padding: 2px 6px;
+    border-radius: 99px;
+  }
+  .insight-badge {
+    font-size: 9px;
+    font-weight: 600;
+    color: #1E40AF;
+    background: #EFF6FF;
+    padding: 2px 6px;
+    border-radius: 99px;
+  }
+
+  .deal-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 8px;
+  }
+  .deal-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .deal-name { font-size: 11px; font-weight: 600; color: #0F172A; }
+  .deal-meta { font-size: 9px; color: #94A3B8; margin-top: 1px; }
+  .deal-right { text-align: right; }
+  .deal-value { font-size: 11px; font-weight: 600; color: #0F172A; }
+  .risk-badge {
+    font-size: 8px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 99px;
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .risk-badge.high { background: #FEF2F2; color: #DC2626; }
+  .risk-badge.medium { background: #FFFBEB; color: #D97706; }
+
+  .health-row { display: flex; align-items: center; gap: 6px; }
+  .health-bar { flex: 1; height: 3px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
+  .health-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
+  .health-fill.high { background: #EF4444; }
+  .health-fill.medium { background: #F59E0B; }
+  .rep-avatar {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #DBEAFE;
+    color: #1E40AF;
+    font-size: 7px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .alert-card {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 9px;
+    color: #DC2626;
+    font-weight: 500;
+  }
+  .alert-dot { width: 6px; height: 6px; border-radius: 50%; background: #EF4444; flex-shrink: 0; }
+
+  .pipeline-bars { display: flex; flex-direction: column; gap: 6px; }
+  .pipe-row { display: flex; align-items: center; gap: 6px; }
+  .pipe-label { display: flex; justify-content: space-between; width: 68px; font-size: 9px; color: #64748B; flex-shrink: 0; }
+  .pipe-count { font-weight: 600; color: #0F172A; }
+  .pipe-track { flex: 1; height: 4px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
+  .pipe-fill { height: 100%; background: #1E40AF; border-radius: 99px; }
+  .pipe-value { font-size: 9px; color: #64748B; width: 30px; text-align: right; flex-shrink: 0; }
+
+  .stat-row { display: flex; gap: 6px; margin-top: 4px; }
+  .stat-box { flex: 1; text-align: center; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; padding: 6px 4px; }
+  .stat-num { font-size: 18px; font-weight: 700; line-height: 1; }
+  .stat-num.red { color: #DC2626; }
+  .stat-num.amber { color: #D97706; }
+  .stat-num.green { color: #059669; }
+  .stat-lbl { font-size: 8px; color: #94A3B8; margin-top: 2px; }
+
+  .insight-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 8px;
+  }
+  .insight-icon {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .insight-icon.red { background: #FEF2F2; }
+  .insight-icon.amber { background: #FFFBEB; }
+  .insight-icon.green { background: #ECFDF5; }
+  .insight-text { font-size: 10px; color: #334155; line-height: 1.4; margin: 0; }
+
+  .next-action {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: auto;
+  }
+  .next-label { font-size: 9px; color: #64748B; font-weight: 500; margin-bottom: 3px; }
+  .next-text { font-size: 10px; color: #1E40AF; font-weight: 500; line-height: 1.4; }
+
+  .anim-in {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import Button from '../ui/Button.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Connect your stack',
+    desc: 'HubSpot, Zoho, Fireflies, Gong, Gmail — one-click OAuth. No data migration. No IT tickets.',
+    detail: '5 min setup',
+    icon: '🔌',
+  },
+  {
+    n: '02',
+    title: 'PrismIQ reads the signals',
+    desc: 'Call transcripts, email threads, CRM stages, activity gaps — all cross-referenced automatically every night.',
+    detail: 'Runs overnight',
+    icon: '🧠',
+  },
+  {
+    n: '03',
+    title: 'Act on what matters',
+    desc: 'Every morning: your pipeline, risk-ranked. Every deal: next action suggested. No more guessing.',
+    detail: 'Daily briefing',
+    icon: '🎯',
+  },
+];
+---
+
+<section id="how-it-works" class="how-section" data-reveal>
+  <div class="content-width">
+
+    <div class="how-header reveal-item">
+      <h2 class="how-h2">
+        Connect your CRM.<br />
+        <span style="color:#1E40AF">Know your pipeline in 30 minutes.</span>
+      </h2>
+      <p class="how-sub">No implementation project. No consultants. No new process for your reps.</p>
+    </div>
+
+    <div class="steps-row">
+      {steps.map((s, i) => (
+        <div class="step-wrap reveal-item" style={`animation-delay:${0.1 + i*0.15}s`}>
+          <div class="step-card">
+            <div class="step-num">{s.n}</div>
+            <div class="step-icon">{s.icon}</div>
+            <h3 class="step-title">{s.title}</h3>
+            <p class="step-desc">{s.desc}</p>
+            <span class="step-detail">{s.detail}</span>
+          </div>
+          {i < steps.length - 1 && (
+            <div class="step-arrow" aria-hidden="true">→</div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div class="how-cta reveal-item" style="animation-delay:0.5s">
+      <Button href="#design-partner" variant="secondary">See It In Action</Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .how-section { background: #F8FAFC; padding: 6rem 1.5rem; border-top: 1px solid #E2E8F0; }
+  .how-header { max-width: 560px; margin-bottom: 3.5rem; }
+  .how-h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #0F172A;
+    margin: 0 0 1rem;
+  }
+  .how-sub { font-size: 1.1rem; color: #64748B; margin: 0; }
+
+  .steps-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 2.5rem;
+  }
+  .step-wrap {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+  }
+  .step-card {
+    flex: 1;
+    background: white;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
+
+  .step-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #E2E8F0;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .step-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .step-title { font-size: 1.05rem; font-weight: 600; color: #0F172A; margin: 0 0 0.5rem; }
+  .step-desc { font-size: 0.875rem; color: #64748B; line-height: 1.6; margin: 0 0 1rem; }
+  .step-detail {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1E40AF;
+    background: #EFF6FF;
+    padding: 3px 8px;
+    border-radius: 99px;
+  }
+
+  .step-arrow {
+    font-size: 1.25rem;
+    color: #CBD5E1;
+    padding: 0 0.75rem;
+    margin-top: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .how-cta { text-align: left; }
+
+  .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal-item.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const o = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+</script>

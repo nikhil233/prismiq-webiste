@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
+@theme {
+  --color-primary: #1E40AF;
+  --color-accent: #3B82F6;
+  --color-violet: #7C3AED;
+  --color-surface: #F8FAFC;
+  --color-subtle: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-text-base: #0F172A;
+  --color-text-muted: #64748B;
+  --color-green: #10B981;
+  --color-amber: #F59E0B;
+  --color-red: #EF4444;
+
+  --font-family-sans: "Inter", system-ui, sans-serif;
+
+  --font-size-hero: 64px;
+  --line-height-hero: 1.1;
+  --font-size-h2: 48px;
+  --line-height-h2: 1.15;
+  --font-size-h3: 32px;
+  --line-height-h3: 1.2;
+
+  --max-width-content: 1280px;
+  --radius-card: 16px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-family-sans);
+    color: var(--color-text-base);
+    background: white;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .section-pad {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .content-width {
+    max-width: var(--max-width-content);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

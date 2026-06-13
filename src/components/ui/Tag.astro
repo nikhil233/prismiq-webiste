@@ -1,0 +1,17 @@
+---
+interface Props {
+  color?: 'blue' | 'violet' | 'green' | 'amber' | 'red';
+  class?: string;
+}
+const { color = 'blue', class: className } = Astro.props;
+const colors = {
+  blue: 'bg-blue-50 text-[#1E40AF]',
+  violet: 'bg-violet-50 text-violet-700',
+  green: 'bg-green-50 text-green-700',
+  amber: 'bg-amber-50 text-amber-700',
+  red: 'bg-red-50 text-red-700',
+};
+---
+<span class={`inline-block text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full ${colors[color]} ${className ?? ''}`}>
+  <slot />
+</span>

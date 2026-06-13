@@ -1,0 +1,116 @@
+---
+import Button from '../ui/Button.astro';
+import Tag from '../ui/Tag.astro';
+
+const pillars = [
+  {
+    icon: '👁',
+    label: "What's happening",
+    desc: 'Full picture of every deal — call summaries, email threads, CRM signals, all cross-referenced.',
+    color: '#EFF6FF',
+    border: '#BFDBFE',
+  },
+  {
+    icon: '⚡',
+    label: "What's at risk",
+    desc: 'Deals flagged before they go cold. Risk scored across recency, commitment, and engagement signals.',
+    color: '#FEF3C7',
+    border: '#FDE68A',
+  },
+  {
+    icon: '🎯',
+    label: 'What to do next',
+    desc: 'Context-specific next actions per deal, per rep. Not generic tips — your actual pipeline, today.',
+    color: '#F0FDF4',
+    border: '#BBF7D0',
+  },
+];
+---
+
+<section class="intro-section" data-reveal>
+  <div class="content-width intro-inner">
+
+    <div class="intro-header reveal-item">
+      <Tag color="violet">New Category</Tag>
+      <h2 class="intro-h2">
+        Revenue Execution Intelligence.<br />
+        <span style="color:#1E40AF">The layer that's been missing.</span>
+      </h2>
+      <p class="intro-sub">
+        Not a CRM. Not a dashboard. Not another AI chatbot.
+        The intelligence layer that sits above your entire revenue stack and tells you what to do.
+      </p>
+    </div>
+
+    <div class="pillar-grid">
+      {pillars.map((p, i) => (
+        <div
+          class="pillar-card reveal-item"
+          style={`background:${p.color}; border-color:${p.border}; animation-delay:${0.1 + i*0.12}s`}
+        >
+          <div class="pillar-icon">{p.icon}</div>
+          <h3 class="pillar-label">{p.label}</h3>
+          <p class="pillar-desc">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="intro-cta reveal-item" style="animation-delay:0.4s">
+      <Button href="#dashboard" variant="primary">See the Platform</Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .intro-section { background: white; padding: 6rem 1.5rem; border-top: 1px solid #E2E8F0; }
+  .intro-inner { max-width: 1280px; margin: auto; }
+
+  .intro-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .intro-h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #0F172A;
+    margin: 0;
+  }
+  .intro-sub { font-size: 1.1rem; color: #64748B; line-height: 1.65; margin: 0; }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .pillar-card {
+    border: 1px solid;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+
+  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .pillar-label { font-size: 1.1rem; font-weight: 600; color: #0F172A; margin: 0 0 0.6rem; }
+  .pillar-desc { font-size: 0.9rem; color: #475569; line-height: 1.65; margin: 0; }
+
+  .intro-cta { text-align: center; }
+
+  .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal-item.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const o = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+</script>

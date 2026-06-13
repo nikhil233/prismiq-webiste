@@ -1,0 +1,62 @@
+---
+const links = [
+  { label: 'Product', href: '#product' },
+  { label: 'Vision', href: '#vision' },
+  { label: 'For Teams', href: '#for-teams' },
+  { label: 'Privacy', href: '#' },
+  { label: 'Terms', href: '#' },
+];
+---
+
+<footer class="footer">
+  <div class="content-width footer-inner">
+    <div class="footer-brand">
+      <p class="footer-logo">PrismIQ</p>
+      <p class="footer-tagline">Revenue Execution Intelligence.<br />The layer that's been missing.</p>
+    </div>
+    <nav class="footer-links">
+      {links.map(l => (
+        <a href={l.href} class="footer-link">{l.label}</a>
+      ))}
+    </nav>
+  </div>
+  <div class="content-width footer-bottom">
+    <p class="footer-copy">© 2026 PrismIQ. All rights reserved.</p>
+    <p class="footer-built">Built for revenue teams who are done guessing.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #0F172A;
+    padding: 4rem 1.5rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
+  .footer-logo { font-size: 1.25rem; font-weight: 700; color: white; margin: 0 0 0.5rem; }
+  .footer-tagline { font-size: 0.85rem; color: #64748B; line-height: 1.5; margin: 0; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; padding-top: 0.25rem; }
+  .footer-link { font-size: 0.875rem; color: #64748B; text-decoration: none; transition: color 0.15s; }
+  .footer-link:hover { color: white; }
+
+  .footer-bottom {
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    gap: 1rem;
+  }
+  .footer-copy { font-size: 0.8rem; color: #475569; margin: 0; }
+  .footer-built { font-size: 0.8rem; color: #334155; margin: 0; font-style: italic; }
+</style>

@@ -1,0 +1,607 @@
+---
+import Button from '../ui/Button.astro';
+import Tag from '../ui/Tag.astro';
+
+import hubspotSvg from '../../../prismIQ/hubspot.svg?raw';
+import zohoSvg    from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
+import zoomSvg    from '../../../prismIQ/zoom.svg?raw';
+import slackSvg   from '../../../prismIQ/slack.svg?raw';
+import gmailSvg   from '../../../prismIQ/gmail.svg?raw';
+import Fireflies  from '../../../prismIQ/Fireflies.svg?raw';
+import ReadAI     from '../../../prismIQ/ReadAI.svg?raw';
+
+const PITCH = 52;
+const OFFSET = 22;
+const CY = 178;
+
+const tools = [
+  { name: 'HubSpot',   svg: hubspotSvg, x: 5,   y: 0,   fd: 4.2, fdd: 0.0 },
+  { name: 'Zoho CRM',  svg: zohoSvg,    x: 158, y: 19,  fd: 3.8, fdd: 0.7 },
+  { name: 'Fireflies', svg: Fireflies,  x: 74,  y: 95,  fd: 4.5, fdd: 1.2 },
+  { name: 'Read AI',   svg: ReadAI,     x: 5,   y: 165, fd: 3.9, fdd: 0.4 },
+  { name: 'Zoom',      svg: zoomSvg,    x: 158, y: 170, fd: 4.1, fdd: 1.5 },
+  { name: 'Slack',     svg: slackSvg,   x: 50,  y: 264, fd: 4.4, fdd: 0.9 },
+  { name: 'Gmail',     svg: gmailSvg,   x: 155, y: 257, fd: 3.7, fdd: 0.2 },
+];
+
+const pathD = (i: number) => {
+  const y = i * PITCH + OFFSET;
+  if (i === 3) return `M 0,${CY} L 112,${CY}`;
+  return `M 0,${y} C 60,${y} 60,${CY} 112,${CY}`;
+};
+---
+
+<section id="product" class="hero-section">
+  <div class="dot-grid" aria-hidden="true"></div>
+  <div class="content-width hero-inner">
+
+    <div class="hero-copy">
+      <div class="hero-tag anim-delay-1">
+        <Tag color="blue">Revenue Execution Intelligence</Tag>
+      </div>
+      <h1 class="hero-h1 anim-delay-2">
+        Your entire sales stack.<br/>
+        <span class="hero-blue">One intelligence engine.</span>
+      </h1>
+      <p class="hero-sub anim-delay-3">
+        PrismIQ connects every tool your team uses, understands the signals,
+        and tells you exactly what to do next.
+      </p>
+      <form class="hero-waitlist anim-delay-4" action="#design-partner">
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Enter your work email"
+          class="waitlist-input"
+        />
+        <button type="submit" class="waitlist-btn">Join Waitlist →</button>
+      </form>
+      <p class="hero-note anim-delay-5">
+        <span class="hero-check">✓</span> Free during beta &nbsp;·&nbsp;
+        <span class="hero-check">✓</span> No credit card &nbsp;·&nbsp;
+        <span class="hero-check">✓</span> 20 spots left
+      </p>
+    </div>
+
+    <div class="df-outer anim-delay-6">
+      <div class="dataflow">
+
+        <!-- Col 1: Tool chips -->
+        <div class="tools-col">
+          {tools.map((t, i) => (
+            <div
+              class="tool-chip"
+              style={`left:${t.x}px;top:${t.y}px;animation:chipFadeIn 0.45s ease ${0.85 + i * 0.1}s forwards,floatChip ${t.fd}s ease-in-out ${t.fdd}s infinite`}
+            >
+              <span class="tool-icon tool-icon-svg" set:html={t.svg} />
+              <span class="tool-name">{t.name}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Col 2: Converging arrows SVG -->
+        <svg class="left-svg" width="120" height="356" viewBox="0 0 120 356" fill="none" aria-hidden="true">
+          {tools.map((_, i) => (
+            <path
+              d={pathD(i)}
+              stroke="#93C5FD"
+              stroke-width="1.5"
+              stroke-dasharray="5 4"
+              fill="none"
+              class="flow-path"
+              style={`animation-delay:${i * 0.14}s`}
+            />
+          ))}
+          <polygon points={`108,${CY - 4} 116,${CY} 108,${CY + 4}`} fill="#3B82F6" opacity="0.8" />
+        </svg>
+
+        <!-- Col 3: Engine card -->
+        <div class="engine-wrap">
+          <div class="pulse-ring ring-1"></div>
+          <div class="pulse-ring ring-2"></div>
+          <div class="pulse-ring ring-3"></div>
+          <div class="engine-card">
+            <div class="engine-header">
+              <div class="engine-mark">PQ</div>
+              <span class="engine-brand">PrismIQ</span>
+            </div>
+            <div class="engine-orb">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Left hemisphere -->
+                <path d="M32 11 C32 11 24 10 18.5 15 C13 20 11 26 11 31 C11 36 13 40 17 43 C20 45.5 24.5 47 29 47 L32 47 L32 11Z"
+                      fill="#DBEAFE" stroke="#1E40AF" stroke-width="1.5" stroke-linejoin="round"/>
+                <!-- Right hemisphere -->
+                <path d="M32 11 C32 11 40 10 45.5 15 C51 20 53 26 53 31 C53 36 51 40 47 43 C44 45.5 39.5 47 35 47 L32 47 L32 11Z"
+                      fill="#EFF6FF" stroke="#1E40AF" stroke-width="1.5" stroke-linejoin="round"/>
+                <!-- Center fissure -->
+                <line x1="32" y1="11" x2="32" y2="47" stroke="#93C5FD" stroke-width="1"/>
+                <!-- Left sulci -->
+                <path d="M15 23 Q20 19 22 25" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                <path d="M13 33 Q18 29 20 36" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                <path d="M15 41 Q19 38 22 42" stroke="#1D4ED8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <!-- Right sulci -->
+                <path d="M49 23 Q44 19 42 25" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                <path d="M51 33 Q46 29 44 36" stroke="#1D4ED8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                <path d="M49 41 Q45 38 42 42" stroke="#1D4ED8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <!-- Brain stem -->
+                <path d="M27 47 C27 51 37 51 37 47" stroke="#1E40AF" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                <!-- Neural pulse dots -->
+                <circle cx="19" cy="21" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0s"/>
+                <circle cx="13" cy="31" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.5s"/>
+                <circle cx="45" cy="21" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.25s"/>
+                <circle cx="51" cy="31" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.75s"/>
+              </svg>
+            </div>
+            <p class="engine-title">Revenue Intelligence Engine</p>
+            <div class="engine-pills">
+              <span class="e-pill">Signal Detection</span>
+              <span class="e-pill">Risk Scoring</span>
+              <span class="e-pill">Next Actions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 4: Right arrow -->
+        <svg class="right-svg" width="80" height="56" viewBox="0 0 80 56" fill="none" aria-hidden="true">
+          <path d="M 0,28 L 66,28" stroke="#93C5FD" stroke-width="1.5" stroke-dasharray="5 4" fill="none" class="flow-path" />
+          <polygon points="62,24 70,28 62,32" fill="#3B82F6" opacity="0.8" />
+        </svg>
+
+        <!-- Col 5: Output card -->
+        <div class="output-card">
+          <div class="oc-header">
+            <span class="oc-title">Pipeline Intelligence</span>
+            <span class="oc-live">● Live</span>
+          </div>
+          <div class="oc-deals">
+            <div class="oc-deal">
+              <div class="oc-deal-info">
+                <div class="oc-deal-name">Acme Corp</div>
+                <div class="oc-deal-meta">Proposal · 9d ago</div>
+              </div>
+              <div class="oc-deal-right">
+                <div class="oc-deal-val">$48k</div>
+                <span class="oc-badge oc-red">At Risk</span>
+              </div>
+            </div>
+            <div class="oc-deal">
+              <div class="oc-deal-info">
+                <div class="oc-deal-name">Brightwave</div>
+                <div class="oc-deal-meta">Demo · 5d ago</div>
+              </div>
+              <div class="oc-deal-right">
+                <div class="oc-deal-val">$22.5k</div>
+                <span class="oc-badge oc-amber">Needs Attn</span>
+              </div>
+            </div>
+            <div class="oc-deal">
+              <div class="oc-deal-info">
+                <div class="oc-deal-name">Zenith Labs</div>
+                <div class="oc-deal-meta">Negotiation · 12d ago</div>
+              </div>
+              <div class="oc-deal-right">
+                <div class="oc-deal-val">$91k</div>
+                <span class="oc-badge oc-red">At Risk</span>
+              </div>
+            </div>
+          </div>
+          <div class="oc-action">
+            <div class="oc-action-label">AI Next Action</div>
+            <div class="oc-action-text">→ Follow up Acme Corp — quote promised June 4 not sent</div>
+          </div>
+          <div class="oc-stat">
+            <span class="oc-stat-num">$161k</span>
+            <span class="oc-stat-label">at risk this week</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="df-status anim-delay-7">
+        <span class="blink-dot"></span>
+        Analyzing 47 signals from your stack right now
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    overflow: hidden;
+    background: white;
+  }
+  .dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#DBEAFE 1px, transparent 0);
+    background-size: 28px 28px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .hero-copy {
+    text-align: center;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .hero-tag  { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+  .hero-h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #0F172A;
+    margin: 0;
+    opacity: 0;
+    animation: fadeUp 0.55s ease forwards;
+  }
+  .hero-blue { color: #1E40AF; }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: #64748B;
+    line-height: 1.65;
+    max-width: 560px;
+    margin: 0;
+    opacity: 0;
+    animation: fadeUp 0.55s ease forwards;
+  }
+  .hero-waitlist {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 6px 6px 6px 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    width: 100%;
+    max-width: 460px;
+    opacity: 0;
+    animation: fadeUp 0.55s ease forwards;
+  }
+  .waitlist-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #0F172A;
+    background: transparent;
+    min-width: 0;
+  }
+  .waitlist-input::placeholder { color: #94A3B8; }
+  .waitlist-btn {
+    background: #1E40AF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .waitlist-btn:hover { background: #1D3FA5; }
+  .hero-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: #94A3B8;
+    margin: 0;
+    opacity: 0;
+    animation: fadeUp 0.45s ease forwards;
+  }
+  .hero-check { color: #10B981; font-weight: 600; }
+
+  .df-outer {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .dataflow {
+    display: grid;
+    grid-template-columns: 242px 130px 220px 80px 240px;
+    align-items: center;
+    gap: 0;
+    min-width: 848px;
+  }
+
+  .tools-col {
+    position: relative;
+    height: 360px;
+    width: 240px;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+  .tool-chip {
+    position: absolute;
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 8px 8px;
+
+    opacity: 0;
+  }
+  .tool-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tool-icon-svg {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    padding: 6px;
+    overflow: hidden;
+  }
+  .tool-icon-svg > svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .tool-name {
+    font-size: 9px;
+    font-weight: 500;
+    color: #475569;
+    text-align: center;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .left-svg { align-self: center; overflow: visible; }
+  .right-svg { align-self: center; }
+
+  .flow-path { animation: dashFlow 2s linear infinite; }
+  @keyframes dashFlow {
+    from { stroke-dashoffset: 0; }
+    to   { stroke-dashoffset: -27; }
+  }
+
+  .engine-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pulse-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(59, 130, 246, 0.22);
+    pointer-events: none;
+    animation: pulseExpand 2.6s ease-out infinite;
+  }
+  .ring-1 { width: 168px; height: 168px; margin: -84px 0 0 -84px;   animation-delay: 0s; }
+  .ring-2 { width: 210px; height: 210px; margin: -105px 0 0 -105px; animation-delay: 0.87s; }
+  .ring-3 { width: 252px; height: 252px; margin: -126px 0 0 -126px; animation-delay: 1.74s; }
+  @keyframes pulseExpand {
+    0%   { opacity: 0.8; transform: scale(0.72); }
+    100% { opacity: 0;   transform: scale(1.08); }
+  }
+
+  .engine-card {
+    position: relative;
+    z-index: 1;
+    width: 174px;
+    background: white;
+    border: 2px solid #1E40AF;
+    border-radius: 18px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow:
+      0 0 0 4px rgba(30, 64, 175, 0.06),
+      0 0 40px rgba(30, 64, 175, 0.18),
+      0 8px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .engine-header { display: flex; align-items: center; gap: 7px; }
+  .engine-mark {
+    width: 22px; height: 22px;
+    background: #1E40AF; border-radius: 6px;
+    color: white; font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .engine-brand { font-size: 12px; font-weight: 700; color: #1E40AF; }
+  .engine-orb {
+    background: #EFF6FF; border: 1.5px solid #BFDBFE;
+    border-radius: 50%; width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .engine-title { font-size: 10.5px; font-weight: 600; color: #0F172A; line-height: 1.35; }
+  .engine-pills { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+  .e-pill {
+    font-size: 8.5px; font-weight: 500;
+    background: #EFF6FF; color: #1E40AF;
+    border: 1px solid #BFDBFE; border-radius: 99px;
+    padding: 3px 8px; text-align: center; white-space: nowrap;
+  }
+
+  .output-card {
+    background: white;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 8px 32px rgba(30, 64, 175, 0.10), 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: floatCard 4s ease-in-out infinite;
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-5px); }
+  }
+
+  .oc-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 7px; border-bottom: 1px solid #F1F5F9; }
+  .oc-title { font-size: 11px; font-weight: 600; color: #0F172A; }
+  .oc-live  { font-size: 9px; font-weight: 600; color: #10B981; background: #ECFDF5; padding: 2px 6px; border-radius: 99px; }
+  .oc-deals { display: flex; flex-direction: column; gap: 6px; }
+  .oc-deal { display: flex; align-items: center; justify-content: space-between; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 6px 8px; }
+  .oc-deal-name { font-size: 10px; font-weight: 600; color: #0F172A; }
+  .oc-deal-meta { font-size: 8.5px; color: #94A3B8; margin-top: 1px; }
+  .oc-deal-right { text-align: right; }
+  .oc-deal-val { font-size: 10px; font-weight: 600; color: #0F172A; }
+  .oc-badge { font-size: 8px; font-weight: 600; padding: 2px 5px; border-radius: 99px; display: inline-block; margin-top: 2px; }
+  .oc-red   { background: #FEF2F2; color: #DC2626; }
+  .oc-amber { background: #FFFBEB; color: #D97706; }
+  .oc-action { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 7px; padding: 7px 9px; }
+  .oc-action-label { font-size: 8.5px; color: #64748B; font-weight: 500; margin-bottom: 2px; }
+  .oc-action-text  { font-size: 9.5px; color: #1E40AF; font-weight: 500; line-height: 1.45; }
+  .oc-stat { display: flex; align-items: baseline; gap: 5px; background: #FFF7ED; border: 1px solid #FED7AA; border-radius: 7px; padding: 6px 10px; }
+  .oc-stat-num   { font-size: 17px; font-weight: 700; color: #C2410C; }
+  .oc-stat-label { font-size: 9px; color: #92400E; }
+
+  .df-status {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 0.75rem; color: #94A3B8; margin: 0;
+    opacity: 0; animation: fadeUp 0.5s ease forwards;
+  }
+  .blink-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #10B981;
+    animation: blink 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  .anim-delay-1 { animation-delay: 0.1s; }
+  .anim-delay-2 { animation-delay: 0.2s; }
+  .anim-delay-3 { animation-delay: 0.32s; }
+  .anim-delay-4 { animation-delay: 0.44s; }
+  .anim-delay-5 { animation-delay: 0.54s; }
+  .anim-delay-6 { animation-delay: 0.7s; }
+  .anim-delay-7 { animation-delay: 1.2s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .neural-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: neuralPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes neuralPulse {
+    0%, 100% { opacity: 0.25; transform: scale(0.6); }
+    50%       { opacity: 1;    transform: scale(1.4); }
+  }
+  @keyframes chipFadeIn {
+    from { opacity: 0; transform: scale(0.82); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes floatChip {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-7px); }
+  }
+
+  /* ── Tablet (768px – 1024px): horizontal scroll ── */
+  @media (max-width: 1024px) {
+    .hero-section { padding-top: 5.5rem; }
+    .hero-copy { max-width: 100%; }
+    .hero-sub { max-width: 100%; }
+    .hero-waitlist { max-width: 100%; }
+    .df-outer { max-width: 100%; }
+    .dataflow { min-width: 912px; }
+  }
+
+  /* ── Mobile (< 768px) ── */
+  @media (max-width: 767px) {
+    .hero-section {
+      padding-top: 4.5rem;
+      padding-bottom: 3rem;
+    }
+    .hero-inner { gap: 2rem; }
+    .hero-copy {
+      max-width: 100%;
+      gap: 1rem;
+    }
+    .hero-h1 {
+      font-size: clamp(1.875rem, 7.5vw, 2.5rem);
+      letter-spacing: -0.02em;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      max-width: 100%;
+    }
+    .hero-waitlist {
+      max-width: 100%;
+      padding: 5px 5px 5px 14px;
+    }
+    .waitlist-btn {
+      padding: 9px 14px;
+      font-size: 13px;
+    }
+    .hero-note {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.25rem;
+      font-size: 0.72rem;
+    }
+
+    /* Dataflow: collapse to output card only */
+    .df-outer {
+      overflow-x: visible;
+      max-width: 100%;
+      align-items: stretch;
+    }
+    .dataflow {
+      grid-template-columns: 1fr;
+      min-width: unset;
+      width: 100%;
+    }
+    .tools-col  { display: none; }
+    .left-svg   { display: none; }
+    .engine-wrap { display: none; }
+    .right-svg  { display: none; }
+    .output-card {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      animation: none;
+    }
+    .df-status { justify-content: center; }
+  }
+
+  /* ── Small mobile (< 400px) ── */
+  @media (max-width: 399px) {
+    .hero-h1 { font-size: 1.75rem; }
+    .waitlist-input { font-size: 13px; }
+    .waitlist-btn {
+      padding: 9px 11px;
+      font-size: 12px;
+    }
+  }
+</style>

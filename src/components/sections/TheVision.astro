@@ -1,0 +1,148 @@
+---
+import Button from '../ui/Button.astro';
+import Tag from '../ui/Tag.astro';
+
+const phases = [
+  {
+    label: 'Now · Available',
+    title: 'Pipeline Intelligence',
+    desc: "Know what's at risk. Know what to do. Every deal, every day. The foundation of revenue execution.",
+    active: true,
+  },
+  {
+    label: 'Next · Q3 2026',
+    title: 'Call Intelligence',
+    desc: 'Every conversation analysed. Every commitment tracked. Rep coaching at scale without the overhead.',
+    active: false,
+  },
+  {
+    label: 'Vision · 2027',
+    title: 'Revenue OS',
+    desc: 'The operating layer for your entire revenue team. Forecast, coach, execute — one surface.',
+    active: false,
+  },
+];
+---
+
+<section class="vision-section" data-reveal>
+  <div class="content-width vision-inner">
+
+    <div class="vision-header reveal-item">
+      <Tag color="violet">The Vision</Tag>
+      <h2 class="vision-h2">This is just the beginning.</h2>
+      <p class="vision-sub">
+        We're building the intelligence layer that replaces every weekly status meeting,
+        every manual report, every gut-check forecast.
+      </p>
+    </div>
+
+    <div class="vision-phases">
+      {phases.map((p, i) => (
+        <div
+          class={`phase-card reveal-item ${p.active ? 'phase-active' : ''}`}
+          style={`animation-delay:${0.1 + i*0.13}s`}
+        >
+          <span class="phase-label">{p.label}</span>
+          <h3 class="phase-title">{p.title}</h3>
+          <p class="phase-desc">{p.desc}</p>
+          {p.active && <span class="phase-badge">Building now</span>}
+        </div>
+      ))}
+    </div>
+
+    <div class="vision-cta reveal-item" style="animation-delay:0.5s">
+      <Button href="#design-partner" variant="primary">Join the founding cohort</Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .vision-section { background: #F8FAFC; padding: 6rem 1.5rem; border-top: 1px solid #E2E8F0; }
+  .vision-inner { max-width: 1280px; margin: auto; }
+
+  .vision-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .vision-h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #0F172A;
+    margin: 0;
+  }
+  .vision-sub { font-size: 1.1rem; color: #64748B; line-height: 1.6; margin: 0; }
+
+  .vision-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .phase-card {
+    border-radius: 16px;
+    padding: 2rem;
+    border: 1px solid #E2E8F0;
+    background: white;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .phase-card:hover { transform: translateY(-3px); }
+  .phase-card.phase-active {
+    background: #1E40AF;
+    border-color: #1E40AF;
+  }
+
+  .phase-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.875rem;
+  }
+  .phase-active .phase-label { color: #93C5FD; }
+  .phase-card:not(.phase-active) .phase-label { color: #94A3B8; }
+
+  .phase-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .phase-active .phase-title { color: white; }
+  .phase-card:not(.phase-active) .phase-title { color: #0F172A; }
+
+  .phase-desc { font-size: 0.875rem; line-height: 1.65; margin: 0; }
+  .phase-active .phase-desc { color: #BFDBFE; }
+  .phase-card:not(.phase-active) .phase-desc { color: #64748B; }
+
+  .phase-badge {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+
+  .vision-cta { text-align: center; }
+
+  .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal-item.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const o = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+</script>
