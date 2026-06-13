@@ -1,17 +1,53 @@
 ---
-const left = [
-  'Deal stage: Proposal',
-  'Last activity: 8 days ago',
-  'Owner: Sarah K.',
-  'Value: $48,000',
-  'Close date: Jun 30',
+const crmFields = [
+  { label: 'Contact',       value: 'Rohit Sharma, VP Sales' },
+  { label: 'Company',       value: 'Nexora Solutions' },
+  { label: 'Deal Value',    value: '₹22,00,000' },
+  { label: 'Stage',         value: 'Proposal Sent' },
+  { label: 'Last Activity', value: '5 days ago' },
+  { label: 'Owner',         value: 'Kavya R.' },
+  { label: 'Next Step',     value: '' },
+  { label: 'Notes',         value: 'Had a call, went well' },
+  { label: 'Close Date',    value: 'Jun 30' },
 ];
-const right = [
-  'Last call: Sarah promised a custom quote by Friday — never sent',
-  'Competitor mentioned: prospect demoed a rival last week',
-  'Decision maker changed: new CFO involved, not in CRM',
-  'Sentiment: last 2 emails went unanswered',
-  'Risk: High — 3 unanswered follow-ups in 9 days',
+
+const signals = [
+  { src: 'Email',    icon: '📧', text: 'Pricing deck opened 3× on Jun 11 — 47 sec total view time', sev: 'warn' },
+  { src: 'Email',    icon: '📧', text: 'CFO added to thread — new stakeholder not in CRM', sev: 'danger' },
+  { src: 'CRM',      icon: '📊', text: 'Last rep email went unanswered — 4 days of silence', sev: 'danger' },
+  { src: 'Call',     icon: '📞', text: 'Competitor "Salesken" mentioned on Jun 9 call recording', sev: 'warn' },
+];
+
+const risks = [
+  'No contact with decision-maker in 8 days',
+  'Demo rescheduled twice — second no-show likely',
+  'Proposal viewed once, less than 1 min total',
+];
+
+const actions = [
+  { urgency: 'Today', text: 'Call Rohit — acknowledge CFO addition, ask for 3-way intro' },
+  { urgency: 'By EOD', text: 'Send updated pricing with ROI calculator attached' },
+];
+
+const sources = [
+  {
+    icon: '📊',
+    name: 'From CRM',
+    signals: ['Stage velocity drift', 'Inactivity triggers', 'Close date slippage', 'Deal age tracking'],
+    count: '4 signals this week',
+  },
+  {
+    icon: '📞',
+    name: 'From Calls & Meetings',
+    signals: ['Commitments extracted', 'Objections logged', 'Competitor mentions', 'Sentiment scoring'],
+    count: '7 signals this week',
+  },
+  {
+    icon: '📧',
+    name: 'From Email & Docs',
+    signals: ['Deck open events', 'Link-click patterns', 'Response-gap detection', 'Forwarding signals'],
+    count: '5 signals this week',
+  },
 ];
 ---
 
@@ -25,43 +61,122 @@ const right = [
       </h2>
       <p class="wtf-sub">
         Your CRM is full. Your calendar is full. The signal is buried in the noise.
-        PrismIQ surfaces the signal.
+        PrismIQ surfaces exactly what needs your attention — right now.
       </p>
     </div>
 
-    <div class="wtf-grid reveal-item" style="animation-delay:0.15s">
-      <div class="wtf-card dim">
-        <div class="wtf-card-label">What your CRM shows</div>
-        <ul class="wtf-list">
-          {left.map(item => (
-            <li class="wtf-item dim-item">
-              <span class="wtf-dash">—</span>
-              {item}
-            </li>
+    <!-- Main comparison -->
+    <div class="wtf-compare reveal-item" style="animation-delay:0.12s">
+
+      <!-- Left: raw CRM record -->
+      <div class="wtf-panel wtf-dim">
+        <div class="wtf-panel-header">
+          <span class="panel-eyebrow dim-eye">What your CRM shows</span>
+          <span class="panel-badge dim-badge">Manual · Last updated 5d ago</span>
+        </div>
+        <div class="crm-record">
+          {crmFields.map(f => (
+            <div class={`crm-row${f.value === '' ? ' crm-empty' : ''}`}>
+              <span class="crm-label">{f.label}</span>
+              <span class="crm-value">{f.value === '' ? '(empty)' : f.value}</span>
+            </div>
           ))}
-        </ul>
-        <div class="wtf-verdict dim-verdict">
-          <span>😐</span> You know a lot. You understand nothing.
+        </div>
+        <div class="panel-verdict dim-verdict">
+          <span>😐</span>
+          <span>You know a lot. You understand nothing actionable.</span>
         </div>
       </div>
 
-      <div class="wtf-divider">
+      <!-- Divider -->
+      <div class="wtf-vs">
+        <div class="vs-line"></div>
         <div class="vs-pill">vs</div>
+        <div class="vs-line"></div>
       </div>
 
-      <div class="wtf-card bright">
-        <div class="wtf-card-label bright-label">What PrismIQ surfaces</div>
-        <ul class="wtf-list">
-          {right.map(item => (
-            <li class="wtf-item bright-item">
-              <span class="arrow">→</span>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <div class="wtf-verdict bright-verdict">
-          <span>⚡</span> Now you know exactly what to do next.
+      <!-- Right: PrismIQ intelligence -->
+      <div class="wtf-panel wtf-bright">
+        <div class="wtf-panel-header">
+          <span class="panel-eyebrow bright-eye">What PrismIQ surfaces</span>
+          <span class="panel-badge bright-badge">AI · Updated live</span>
         </div>
+
+        <!-- Health score -->
+        <div class="health-row">
+          <span class="health-label">Deal Health</span>
+          <div class="health-bar-wrap">
+            <div class="health-bar" style="width:34%"></div>
+          </div>
+          <span class="health-score">34 / 100</span>
+          <span class="health-tag">At Risk</span>
+        </div>
+
+        <!-- Signals -->
+        <div class="pi-block">
+          <div class="pi-block-title">Signals Detected</div>
+          <div class="pi-signals">
+            {signals.map(s => (
+              <div class={`pi-signal pi-signal-${s.sev}`}>
+                <span class="pi-sig-src">{s.src}</span>
+                <span class="pi-sig-text">{s.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Commitment gap -->
+        <div class="pi-block">
+          <div class="pi-block-title">Commitment Gap</div>
+          <div class="pi-commit">
+            <span class="commit-quote">"Send revised pricing by Wed"</span>
+            <span class="commit-src">— Jun 10 call · Kavya R.</span>
+            <span class="commit-status overdue">⚠ Overdue by 2 days</span>
+          </div>
+        </div>
+
+        <!-- Risks -->
+        <div class="pi-block">
+          <div class="pi-block-title">Risk Factors</div>
+          <ul class="pi-risks">
+            {risks.map(r => <li>{r}</li>)}
+          </ul>
+        </div>
+
+        <!-- Actions -->
+        <div class="pi-actions">
+          {actions.map(a => (
+            <div class="pi-action">
+              <span class="pi-action-urgency">{a.urgency}</span>
+              <span class="pi-action-text">→ {a.text}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="panel-verdict bright-verdict">
+          <span>⚡</span>
+          <span>You know exactly what to do — and when.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Signal sources strip -->
+    <div class="sources-strip reveal-item" style="animation-delay:0.25s">
+      <div class="sources-label">PrismIQ pulls signal from every layer of your stack</div>
+      <div class="sources-grid">
+        {sources.map(s => (
+          <div class="source-card">
+            <div class="source-top">
+              <span class="source-icon">{s.icon}</span>
+              <span class="source-name">{s.name}</span>
+            </div>
+            <ul class="source-signals">
+              {s.signals.map(sig => <li>{sig}</li>)}
+            </ul>
+            <div class="source-count">{s.count}</div>
+          </div>
+        ))}
       </div>
     </div>
 
@@ -69,87 +184,164 @@ const right = [
 </section>
 
 <style>
-  .wtf-section {
-    background: #F8FAFC;
-    padding: 6rem 1.5rem;
-    border-top: 1px solid #E2E8F0;
-  }
-  .wtf-header { max-width: 640px; margin-bottom: 3rem; }
+  .wtf-section { background: #F8FAFC; padding: 6rem 1.5rem; border-top: 1px solid #E2E8F0; }
+  .wtf-header { max-width: 680px; margin-bottom: 3rem; }
   .wtf-h2 {
-    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    color: #0F172A;
-    margin: 0 0 1rem;
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem); font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.15; color: #0F172A; margin: 0 0 1rem;
   }
-  .wtf-sub { font-size: 1.1rem; color: #64748B; line-height: 1.6; margin: 0; }
+  .wtf-sub { font-size: 1.05rem; color: #64748B; line-height: 1.65; margin: 0; }
 
-  .wtf-grid {
+  /* ── Compare grid ── */
+  .wtf-compare {
     display: grid;
-    grid-template-columns: 1fr 40px 1fr;
+    grid-template-columns: 1fr 48px 1fr;
     gap: 0;
     align-items: start;
+    margin-bottom: 3rem;
   }
 
-  .wtf-card {
-    border-radius: 16px;
-    padding: 1.75rem;
+  .wtf-panel {
+    border-radius: 18px; padding: 1.75rem;
     border: 1px solid #E2E8F0;
+    display: flex; flex-direction: column; gap: 1.25rem;
   }
-  .wtf-card.dim { background: white; }
-  .wtf-card.bright { background: #EFF6FF; border-color: #BFDBFE; }
+  .wtf-dim   { background: white; }
+  .wtf-bright { background: #EFF6FF; border-color: #BFDBFE; }
 
-  .wtf-card-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #94A3B8;
-    margin-bottom: 1.25rem;
+  .wtf-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .panel-eyebrow {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
   }
-  .bright-label { color: #1E40AF; }
-
-  .wtf-list { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
-  .wtf-item { display: flex; gap: 0.6rem; font-size: 0.875rem; line-height: 1.5; align-items: flex-start; }
-  .dim-item { color: #94A3B8; }
-  .bright-item { color: #1E3A8A; }
-  .wtf-dash { color: #CBD5E1; flex-shrink: 0; }
-  .arrow { color: #1E40AF; flex-shrink: 0; font-weight: 600; }
-
-  .wtf-verdict {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.6rem 0.8rem;
-    border-radius: 8px;
+  .dim-eye    { color: #94A3B8; }
+  .bright-eye { color: #1E40AF; }
+  .panel-badge {
+    font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 99px;
   }
-  .dim-verdict { background: #F1F5F9; color: #64748B; }
+  .dim-badge    { background: #F1F5F9; color: #94A3B8; }
+  .bright-badge { background: #DBEAFE; color: #1E40AF; }
+
+  /* CRM record */
+  .crm-record { display: flex; flex-direction: column; gap: 0; }
+  .crm-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 6px 0; border-bottom: 1px solid #F1F5F9; gap: 12px;
+  }
+  .crm-row:last-child { border-bottom: none; }
+  .crm-label { font-size: 0.72rem; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+  .crm-value { font-size: 0.82rem; color: #475569; text-align: right; }
+  .crm-empty .crm-value { color: #CBD5E1; font-style: italic; }
+
+  /* Health score */
+  .health-row {
+    display: flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid #BFDBFE; border-radius: 10px; padding: 10px 14px;
+  }
+  .health-label { font-size: 0.75rem; font-weight: 700; color: #1E40AF; white-space: nowrap; }
+  .health-bar-wrap { flex: 1; height: 6px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
+  .health-bar { height: 100%; background: #EF4444; border-radius: 99px; }
+  .health-score { font-size: 0.75rem; font-weight: 700; color: #0F172A; white-space: nowrap; }
+  .health-tag { font-size: 0.68rem; font-weight: 700; background: #FEF2F2; color: #DC2626; padding: 2px 7px; border-radius: 99px; white-space: nowrap; }
+
+  /* PI blocks */
+  .pi-block { display: flex; flex-direction: column; gap: 6px; }
+  .pi-block-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #1E40AF; }
+
+  .pi-signals { display: flex; flex-direction: column; gap: 5px; }
+  .pi-signal {
+    display: flex; align-items: baseline; gap: 7px;
+    border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; line-height: 1.45;
+  }
+  .pi-signal-danger { background: #FEF2F2; color: #1E293B; }
+  .pi-signal-warn   { background: #FFFBEB; color: #1E293B; }
+  .pi-sig-src {
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: #94A3B8; white-space: nowrap; flex-shrink: 0;
+  }
+
+  .pi-commit {
+    background: white; border: 1px solid #BFDBFE; border-radius: 9px; padding: 10px 12px;
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .commit-quote { font-size: 0.82rem; font-weight: 600; color: #1E3A8A; font-style: italic; }
+  .commit-src   { font-size: 0.72rem; color: #64748B; }
+  .commit-status { font-size: 0.72rem; font-weight: 700; }
+  .overdue { color: #DC2626; }
+
+  .pi-risks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+  .pi-risks li {
+    font-size: 0.8rem; color: #475569; padding-left: 14px; position: relative; line-height: 1.45;
+  }
+  .pi-risks li::before { content: '•'; position: absolute; left: 0; color: #EF4444; font-weight: 700; }
+
+  .pi-actions { display: flex; flex-direction: column; gap: 6px; }
+  .pi-action {
+    display: flex; align-items: baseline; gap: 8px;
+    background: #1E40AF; border-radius: 9px; padding: 9px 12px;
+  }
+  .pi-action-urgency {
+    font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em;
+    background: rgba(255,255,255,0.18); color: white; padding: 2px 6px; border-radius: 4px; flex-shrink: 0;
+  }
+  .pi-action-text { font-size: 0.8rem; font-weight: 600; color: white; line-height: 1.4; }
+
+  .panel-verdict {
+    display: flex; gap: 0.5rem; align-items: center;
+    font-size: 0.8rem; font-weight: 600; padding: 0.65rem 0.9rem; border-radius: 9px;
+  }
+  .dim-verdict    { background: #F1F5F9; color: #64748B; }
   .bright-verdict { background: #DBEAFE; color: #1E40AF; }
 
-  .wtf-divider {
-    display: flex;
-    justify-content: center;
-    padding-top: 2.5rem;
-  }
+  /* VS divider */
+  .wtf-vs { display: flex; flex-direction: column; align-items: center; padding-top: 2.5rem; gap: 6px; }
+  .vs-line { flex: 1; width: 1px; background: #E2E8F0; min-height: 40px; }
   .vs-pill {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: white;
-    border: 1px solid #E2E8F0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #94A3B8;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    width: 34px; height: 34px; border-radius: 50%; background: white;
+    border: 1px solid #E2E8F0; display: flex; align-items: center; justify-content: center;
+    font-size: 0.68rem; font-weight: 700; color: #94A3B8;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06); flex-shrink: 0;
   }
 
+  /* ── Signal sources strip ── */
+  .sources-strip {
+    background: white; border: 1px solid #E2E8F0; border-radius: 18px; padding: 1.75rem;
+  }
+  .sources-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: #94A3B8; margin-bottom: 1.25rem; text-align: center;
+  }
+  .sources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .source-card {
+    background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .source-top { display: flex; align-items: center; gap: 8px; }
+  .source-icon { font-size: 1.1rem; }
+  .source-name { font-size: 0.85rem; font-weight: 700; color: #0F172A; }
+  .source-signals {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .source-signals li {
+    font-size: 0.78rem; color: #64748B; padding-left: 12px; position: relative; line-height: 1.4;
+  }
+  .source-signals li::before { content: '·'; position: absolute; left: 0; color: #3B82F6; font-weight: 700; }
+  .source-count {
+    font-size: 0.72rem; font-weight: 700; color: #1E40AF;
+    background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 99px;
+    padding: 3px 10px; align-self: flex-start;
+  }
+
+  /* Reveal */
   .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .wtf-compare { grid-template-columns: 1fr; gap: 1rem; }
+    .wtf-vs { flex-direction: row; padding-top: 0; }
+    .vs-line { flex: 1; height: 1px; width: auto; min-height: unset; }
+    .sources-grid { grid-template-columns: 1fr; }
+  }
 </style>
 
 <script>
