@@ -89,6 +89,7 @@ const pathD = (i: number) => {
             </div>
           ))}
         </div>
+        <div class="mobile-sep" aria-hidden="true">↓</div>
 
         <!-- Col 2: Converging arrows SVG -->
         <svg class="left-svg" width="120" height="356" viewBox="0 0 120 356" fill="none" aria-hidden="true">
@@ -184,6 +185,7 @@ const pathD = (i: number) => {
             </div>
           </div>
         </div>
+        <div class="mobile-sep" aria-hidden="true">↓</div>
 
         <!-- Col 4: Right arrow -->
         <svg class="right-svg" width="80" height="56" viewBox="0 0 80 56" fill="none" aria-hidden="true">
@@ -636,6 +638,8 @@ const pathD = (i: number) => {
   .oc-stat-num   { font-size: 17px; font-weight: 700; color: #C2410C; }
   .oc-stat-label { font-size: 9px; color: #92400E; }
 
+  .mobile-sep { display: none; }
+
   .df-status {
     display: flex; align-items: center; gap: 7px;
     font-size: 0.75rem; color: #94A3B8; margin: 0;
@@ -691,6 +695,8 @@ const pathD = (i: number) => {
 
   /* ── Mobile (< 768px) ── */
   @media (max-width: 767px) {
+    .hero-tag { display: none; }
+
     .hero-section {
       padding-top: 4.5rem;
       padding-bottom: 3rem;
@@ -723,7 +729,7 @@ const pathD = (i: number) => {
       font-size: 0.72rem;
     }
 
-    /* Dataflow: collapse to output card only */
+    /* Dataflow: tools as wrapped grid on top, output card below */
     .df-outer {
       overflow-x: visible;
       max-width: 100%;
@@ -734,10 +740,44 @@ const pathD = (i: number) => {
       min-width: unset;
       width: 100%;
     }
-    .tools-col  { display: none; }
-    .left-svg   { display: none; }
-    .engine-wrap { display: none; }
-    .right-svg  { display: none; }
+    .tools-col {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      height: auto;
+      width: 100%;
+      overflow: visible;
+    }
+    .tool-chip {
+      position: static;
+      width: 66px;
+      gap: 5px;
+      padding: 9px 7px 8px;
+    }
+    .tool-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+    }
+    .tool-name { font-size: 9.5px; }
+    .left-svg  { display: none; }
+    .right-svg { display: none; }
+    .mobile-sep {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 4px 0;
+      color: #93C5FD;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .engine-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 8px 0;
+    }
     .oc-wrap {
       width: 100%;
       max-width: 380px;

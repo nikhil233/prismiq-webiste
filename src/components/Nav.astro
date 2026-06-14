@@ -1,40 +1,141 @@
 ---
 import Button from './ui/Button.astro';
+
+const links = [
+  { label: 'Product',         href: '#product' },
+  { label: 'Vision',          href: '#vision' },
+  { label: 'For Teams',       href: '#for-teams' },
+  { label: 'Design Partners', href: '#design-partner' },
+];
 ---
 
-<header
-  id="nav"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-200"
->
+<header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-200">
   <div class="content-width flex items-center h-16 px-6">
+
     <a href="/" class="flex-1 text-xl font-bold text-[#1E40AF] tracking-tight">PrismIQ</a>
 
+    <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-8">
-      {(['Product', 'Vision', 'For Teams', 'Design Partners'] as const).map(link => (
+      {links.map(link => (
         <a
-          href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
+          href={link.href}
           class="text-sm text-[#64748B] hover:text-[#0F172A] transition-colors"
         >
-          {link}
+          {link.label}
         </a>
       ))}
     </nav>
 
+    <!-- Desktop CTA -->
     <div class="flex-1 hidden md:flex justify-end">
       <Button href="#design-partner" variant="primary" class="text-sm">
         Join Waitlist
       </Button>
     </div>
+
+    <!-- Mobile hamburger -->
+    <button id="menu-btn" class="md:hidden p-2 -mr-2 flex flex-col justify-center gap-[5px]" aria-label="Open menu" aria-expanded="false">
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+      <span class="ham-bar"></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="mobile-menu-panel md:hidden" aria-hidden="true">
+    <nav class="flex flex-col gap-1 mb-4">
+      {links.map(link => (
+        <a href={link.href} class="mobile-nav-link">{link.label}</a>
+      ))}
+    </nav>
+    <Button href="#design-partner" variant="primary" class="w-full text-sm">
+      Join Waitlist
+    </Button>
   </div>
 </header>
 
+<style>
+  .ham-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #0F172A;
+    border-radius: 99px;
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+
+  /* X state */
+  #menu-btn[aria-expanded="true"] .ham-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  #menu-btn[aria-expanded="true"] .ham-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  #menu-btn[aria-expanded="true"] .ham-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu-panel {
+    background: white;
+    border-top: 1px solid #E2E8F0;
+    padding: 1rem 1.5rem 1.25rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    /* collapsed */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .mobile-menu-panel.open {
+    max-height: 320px;
+    padding-top: 1rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.65rem 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+    border-bottom: 1px solid #F1F5F9;
+    transition: color 0.15s;
+  }
+  .mobile-nav-link:last-child { border-bottom: none; }
+  .mobile-nav-link:hover { color: #1E40AF; }
+</style>
+
 <script>
-  const nav = document.getElementById('nav')!;
+  const nav    = document.getElementById('nav')!;
+  const btn    = document.getElementById('menu-btn')!;
+  const menu   = document.getElementById('mobile-menu')!;
+
+  // Scroll glass effect
   window.addEventListener('scroll', () => {
     if (window.scrollY > 80) {
       nav.classList.add('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-[#E2E8F0]', 'shadow-sm');
     } else {
       nav.classList.remove('bg-white/90', 'backdrop-blur-md', 'border-b', 'border-[#E2E8F0]', 'shadow-sm');
     }
+  });
+
+  // Toggle mobile menu
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    menu.classList.toggle('open', !open);
+    menu.setAttribute('aria-hidden', String(open));
+  });
+
+  // Close on link click
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+    });
   });
 </script>
