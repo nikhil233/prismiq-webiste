@@ -2,31 +2,41 @@
 import Button from '../ui/Button.astro';
 import Tag from '../ui/Tag.astro';
 
-import hubspotSvg from '../../../prismIQ/hubspot.svg?raw';
-import zohoSvg    from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
-import zoomSvg    from '../../../prismIQ/zoom.svg?raw';
-import slackSvg   from '../../../prismIQ/slack.svg?raw';
-import gmailSvg   from '../../../prismIQ/gmail.svg?raw';
-import Fireflies  from '../../../prismIQ/Fireflies.svg?raw';
-import ReadAI     from '../../../prismIQ/ReadAI.svg?raw';
+import hubspotSvg     from '../../../prismIQ/hubspot.svg?raw';
+import zohoSvg        from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
+import zoomSvg        from '../../../prismIQ/zoom.svg?raw';
+import slackSvg       from '../../../prismIQ/slack.svg?raw';
+import gmailSvg       from '../../../prismIQ/gmail.svg?raw';
+import Fireflies      from '../../../prismIQ/Fireflies.svg?raw';
+import ReadAI         from '../../../prismIQ/ReadAI.svg?raw';
+import otterRaw       from '../../../prismIQ/otter.svg?raw';
+import leadsquaredRaw from '../../../prismIQ/leadsquared.svg?raw';
+import salesforceRaw  from '../../../prismIQ/salesforce.svg?raw';
+import fathomRaw      from '../../../prismIQ/Fathom.svg?raw';
+import teamsRaw       from '../../../prismIQ/teams.svg?raw';
 
-const PITCH = 52;
+const PITCH = 78;
 const OFFSET = 22;
-const CY = 178;
+const CY = 178; // i=2 * PITCH(78) + OFFSET(22) = SVG center (356px / 2)
 
 const tools = [
-  { name: 'HubSpot',   svg: hubspotSvg, x: 5,   y: 0,   fd: 4.2, fdd: 0.0 },
-  { name: 'Zoho CRM',  svg: zohoSvg,    x: 158, y: 19,  fd: 3.8, fdd: 0.7 },
-  { name: 'Fireflies', svg: Fireflies,  x: 74,  y: 95,  fd: 4.5, fdd: 1.2 },
-  { name: 'Read AI',   svg: ReadAI,     x: 5,   y: 165, fd: 3.9, fdd: 0.4 },
-  { name: 'Zoom',      svg: zoomSvg,    x: 158, y: 170, fd: 4.1, fdd: 1.5 },
-  { name: 'Slack',     svg: slackSvg,   x: 50,  y: 264, fd: 4.4, fdd: 0.9 },
-  { name: 'Gmail',     svg: gmailSvg,   x: 155, y: 257, fd: 3.7, fdd: 0.2 },
+  { name: 'Zoom',        svg: zoomSvg,         x: 147, y: 1,   fd: 4.1, fdd: 0.0 },
+  { name: 'Slack',       svg: slackSvg,        x: 60,  y: 60,  fd: 4.4, fdd: 0.9 },
+  { name: 'HubSpot',     svg: hubspotSvg,      x: 143, y: 188, fd: 4.2, fdd: 0.4 },
+  { name: 'Read AI',     svg: ReadAI,          x: 145, y: 92,  fd: 3.9, fdd: 1.1 },
+  { name: 'Fireflies',   svg: Fireflies,       x: 222, y: 68,  fd: 4.5, fdd: 0.6 },
+  { name: 'Salesforce',  svg: salesforceRaw,   x: 228, y: 169, fd: 4.3, fdd: 1.4 },
+  { name: 'Zoho CRM',    svg: zohoSvg,         x: 61,  y: 162, fd: 3.8, fdd: 0.3 },
+  { name: 'Teams',       svg: teamsRaw,        x: 95,  y: 372, fd: 4.2, fdd: 1.0 },
+  { name: 'Otter AI',    svg: otterRaw,        x: 205, y: 371, fd: 3.6, fdd: 0.8 },
+  { name: 'Gmail',       svg: gmailSvg,        x: 55,  y: 266, fd: 3.7, fdd: 0.2 },
+  { name: 'Fathom',      svg: fathomRaw,       x: 221, y: 267, fd: 4.0, fdd: 1.2 },
+  { name: 'LeadSquared', svg: leadsquaredRaw,  x: 144, y: 284, fd: 4.6, fdd: 0.5 },
 ];
 
 const pathD = (i: number) => {
   const y = i * PITCH + OFFSET;
-  if (i === 3) return `M 0,${CY} L 112,${CY}`;
+  if (i === 2) return `M 0,${CY} L 112,${CY}`;
   return `M 0,${y} C 60,${y} 60,${CY} 112,${CY}`;
 };
 ---
@@ -82,7 +92,7 @@ const pathD = (i: number) => {
 
         <!-- Col 2: Converging arrows SVG -->
         <svg class="left-svg" width="120" height="356" viewBox="0 0 120 356" fill="none" aria-hidden="true">
-          {tools.map((_, i) => (
+          {tools.slice(0, 5).map((_, i) => (
             <path
               d={pathD(i)}
               stroke="#93C5FD"
@@ -148,14 +158,14 @@ const pathD = (i: number) => {
                 <circle cx="44" cy="20" r="2.2" fill="#3B82F6" class="neural-dot" style="animation-delay:0.21s"/>
                 <circle cx="50" cy="30" r="2.2" fill="#1E40AF" class="neural-dot" style="animation-delay:0.63s"/>
                 <circle cx="44" cy="42" r="2" fill="#3B82F6" class="neural-dot" style="animation-delay:1.05s"/>
-                <!-- Traveling signal — left side -->
+                <!-- Traveling signal - left side -->
                 <circle r="1.8" fill="#60A5FA">
                   <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s" calcMode="linear">
                     <mpath href="#npl"/>
                   </animateMotion>
                   <animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.08;0.88;1" dur="2.2s" repeatCount="indefinite"/>
                 </circle>
-                <!-- Traveling signal — right side -->
+                <!-- Traveling signal - right side -->
                 <circle r="1.8" fill="#60A5FA">
                   <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s" calcMode="linear">
                     <mpath href="#npr"/>
@@ -197,7 +207,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Indus Fintech</span>
                     <span class="oc-badge oc-red">At Risk</span>
                   </div>
-                  <div class="oc-item-insight">No follow-up since quote sent Jun 4 — prospect going cold</div>
+                  <div class="oc-item-insight">No follow-up since quote sent Jun 4 - prospect going cold</div>
                   <div class="oc-item-action">→ Send a "still interested?" note today</div>
                 </div>
                 <div class="oc-item">
@@ -205,7 +215,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Nexora Solutions</span>
                     <span class="oc-badge oc-amber">Needs Attn</span>
                   </div>
-                  <div class="oc-item-insight">Pricing deck opened 3× — decision-maker not yet looped in</div>
+                  <div class="oc-item-insight">Pricing deck opened 3× - decision-maker not yet looped in</div>
                   <div class="oc-item-action">→ Ask for intro to VP before end of week</div>
                 </div>
                 <div class="oc-item">
@@ -213,7 +223,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Kalpana Systems</span>
                     <span class="oc-badge oc-red">Stalled</span>
                   </div>
-                  <div class="oc-item-insight">Champion went silent after legal review — 12 days no reply</div>
+                  <div class="oc-item-insight">Champion went silent after legal review - 12 days no reply</div>
                   <div class="oc-item-action">→ Send ROI case study to re-engage legal team</div>
                 </div>
               </div>
@@ -231,7 +241,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Indus Fintech</span>
                     <span class="oc-badge oc-red">Overdue</span>
                   </div>
-                  <div class="oc-item-insight">"You'll intro me to the CTO by Friday" — from Jun 12 call</div>
+                  <div class="oc-item-insight">"You'll intro me to the CTO by Friday" - from Jun 12 call</div>
                   <div class="oc-item-action">→ Follow up on CTO introduction now</div>
                 </div>
                 <div class="oc-item">
@@ -239,7 +249,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Nexora Solutions</span>
                     <span class="oc-badge oc-amber">Due today</span>
                   </div>
-                  <div class="oc-item-insight">"Send updated pricing within 3 days" — from Jun 10 call</div>
+                  <div class="oc-item-insight">"Send updated pricing within 3 days" - from Jun 10 call</div>
                   <div class="oc-item-action">→ Send revised quote before 5 PM</div>
                 </div>
                 <div class="oc-item">
@@ -247,7 +257,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Kalpana Systems</span>
                     <span class="oc-badge oc-green">On track</span>
                   </div>
-                  <div class="oc-item-insight">"Pilot sign-off by Jun 20" — from Jun 9 call</div>
+                  <div class="oc-item-insight">"Pilot sign-off by Jun 20" - from Jun 9 call</div>
                   <div class="oc-item-action">→ Confirm pilot kickoff agenda for Jun 21</div>
                 </div>
               </div>
@@ -265,7 +275,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Kavya R.</span>
                     <span class="oc-badge oc-amber">Coach</span>
                   </div>
-                  <div class="oc-item-insight">Talk ratio 78% across 8 calls — not leaving room for prospect</div>
+                  <div class="oc-item-insight">Talk ratio 78% across 8 calls - not leaving room for prospect</div>
                   <div class="oc-item-action">→ Share active listening framework before next call</div>
                 </div>
                 <div class="oc-item">
@@ -273,7 +283,7 @@ const pathD = (i: number) => {
                     <span class="oc-item-name">Rohit M.</span>
                     <span class="oc-badge oc-green">Strong</span>
                   </div>
-                  <div class="oc-item-insight">Best discovery questions on team — weak on closing sequences</div>
+                  <div class="oc-item-insight">Best discovery questions on team - weak on closing sequences</div>
                   <div class="oc-item-action">→ Review closing scripts ahead of Kalpana call Friday</div>
                 </div>
                 <div class="oc-item">
@@ -414,8 +424,7 @@ const pathD = (i: number) => {
   .hero-check { color: #10B981; font-weight: 600; }
 
   .df-outer {
-    width: 100%;
-    max-width: 980px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -424,37 +433,38 @@ const pathD = (i: number) => {
     animation: fadeUp 0.6s ease forwards;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+    margin: 0 auto;
   }
   .dataflow {
     display: grid;
-    grid-template-columns: 242px 130px 220px 80px 300px;
+    grid-template-columns: 300px 130px 220px 80px 300px;
     align-items: center;
     gap: 0;
-    min-width: 972px;
+    width: 1080px;
+    margin: 0 auto;
   }
 
   .tools-col {
     position: relative;
-    height: 360px;
-    width: 240px;
+    height: 475px;
+    width: 350px;
     flex-shrink: 0;
     overflow: visible;
   }
   .tool-chip {
     position: absolute;
-    width: 70px;
+    width: 84px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 10px 8px 8px;
-
+    gap: 7px;
+    padding: 12px 10px 10px;
     opacity: 0;
   }
   .tool-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 53px;
+    height: 53px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -463,7 +473,7 @@ const pathD = (i: number) => {
   .tool-icon-svg {
     background: #F8FAFC;
     border: 1px solid #E2E8F0;
-    padding: 6px;
+    padding: 7px;
     overflow: hidden;
   }
   .tool-icon-svg > svg {
@@ -472,7 +482,7 @@ const pathD = (i: number) => {
     display: block;
   }
   .tool-name {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 500;
     color: #475569;
     text-align: center;

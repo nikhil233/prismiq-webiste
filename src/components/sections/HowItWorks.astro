@@ -1,33 +1,42 @@
 ---
 import Button from '../ui/Button.astro';
 
-import hubspotSvg from '../../../prismIQ/hubspot.svg?raw';
-import zohoSvg    from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
-import zoomSvg    from '../../../prismIQ/zoom.svg?raw';
-import fireflyRaw from '../../../prismIQ/Fireflies.svg?raw';
-import slackSvg   from '../../../prismIQ/slack.svg?raw';
-import gmailSvg   from '../../../prismIQ/gmail.svg?raw';
-import readaiRaw  from '../../../prismIQ/ReadAI.svg?raw';
+import hubspotSvg     from '../../../prismIQ/hubspot.svg?raw';
+import zohoSvg        from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
+import zoomSvg        from '../../../prismIQ/zoom.svg?raw';
+import fireflyRaw     from '../../../prismIQ/Fireflies.svg?raw';
+import slackSvg       from '../../../prismIQ/slack.svg?raw';
+import gmailSvg       from '../../../prismIQ/gmail.svg?raw';
+import readaiRaw      from '../../../prismIQ/ReadAI.svg?raw';
+import otterRaw       from '../../../prismIQ/otter.svg?raw';
+import leadsquaredRaw from '../../../prismIQ/leadsquared.svg?raw';
+import salesforceRaw  from '../../../prismIQ/salesforce.svg?raw';
+import fathomRaw      from '../../../prismIQ/Fathom.svg?raw';
+import teamsRaw       from '../../../prismIQ/teams.svg?raw';
 
 const tools = [
-  { name: 'HubSpot',   svg: hubspotSvg },
-  { name: 'Zoho CRM',  svg: zohoSvg    },
-  { name: 'Zoom',      svg: zoomSvg    },
-  { name: 'Fireflies', svg: fireflyRaw },
-  { name: 'Slack',     svg: slackSvg   },
-  { name: 'Gmail',     svg: gmailSvg   },
-  { name: 'Read AI',   svg: readaiRaw  },
+  { name: 'HubSpot',     svg: hubspotSvg },
+  { name: 'Zoho CRM',    svg: zohoSvg    },
+  { name: 'Salesforce',  svg: salesforceRaw },
+  { name: 'Zoom',        svg: zoomSvg    },
+  { name: 'Fireflies',   svg: fireflyRaw },
+  { name: 'Otter AI',    svg: otterRaw   },
+  { name: 'Fathom',      svg: fathomRaw  },
+  { name: 'Slack',       svg: slackSvg   },
+  { name: 'Gmail',       svg: gmailSvg   },
+  { name: 'Read AI',     svg: readaiRaw  },
+  { name: 'LeadSquared', svg: leadsquaredRaw },
+  { name: 'Teams',       svg: teamsRaw   },
 ];
 
 const steps = [
   {
     n: '01',
-    time: '5 min',
-    timeColor: '#10B981',
+    time: '5 min setup',
     title: 'Connect your stack',
     desc: 'One-click OAuth for every tool your team already uses. No data migration. No IT tickets. No new process for reps.',
     bullets: [
-      'We read your data — we never write to your CRM',
+      'We read your data - we never write to your CRM',
       'Works with existing HubSpot, Zoho, Salesforce setups',
       'Call recordings pulled automatically from Fireflies, Gong, Read AI',
       'Email & calendar connected via Gmail / Outlook OAuth',
@@ -35,24 +44,23 @@ const steps = [
     example: {
       label: 'Connected in this session',
       items: [
-        { label: 'CRM records synced',     val: '1,247' },
-        { label: 'Call recordings found',  val: '84' },
-        { label: 'Email threads indexed',  val: '3,412' },
-        { label: 'Open deals detected',    val: '31' },
+        { label: 'CRM records synced',    val: '1,247' },
+        { label: 'Call recordings found', val: '84' },
+        { label: 'Email threads indexed', val: '3,412' },
+        { label: 'Open deals detected',   val: '31' },
       ],
     },
   },
   {
     n: '02',
-    time: '6 hours',
-    timeColor: '#7C3AED',
+    time: 'Runs every 6 hours',
     title: 'PrismIQ reads the signals',
-    desc: 'Every deal gets a live timeline built from CRM events, call transcripts, email threads, and doc engagement — cross-referenced automatically.',
+    desc: 'Every deal gets a live timeline built from CRM events, call transcripts, email threads, and doc engagement - cross-referenced automatically.',
     bullets: [
       'Extracts commitments from every call recording',
       'Flags inactivity, sentiment shifts, and new stakeholders',
       'Scores each deal 0–100 across 6 risk dimensions',
-      'Refreshes every 6 hours — not just overnight',
+      'Refreshes every 6 hours - not just overnight',
     ],
     example: {
       label: 'Signals detected on first run',
@@ -66,12 +74,11 @@ const steps = [
   },
   {
     n: '03',
-    time: 'Daily 8 AM',
-    timeColor: '#1E40AF',
+    time: 'Daily at 8 AM',
     title: 'Act on what matters',
-    desc: "Every morning: your pipeline risk-ranked. Every deal: a specific next action. Every rep: a personalised briefing — before their first call.",
+    desc: "Every morning: your pipeline risk-ranked. Every deal: a specific next action. Every rep: a personalised briefing - before their first call.",
     bullets: [
-      'Pipeline sorted by risk score — highest urgency first',
+      'Pipeline sorted by risk score - highest urgency first',
       'Per-rep morning briefing with ranked action items',
       'Commitment follow-up reminders tied to call dates',
       'Manager digest with forecast delta and team coaching flags',
@@ -101,7 +108,7 @@ const trust = [
     <div class="how-header reveal-item">
       <h2 class="how-h2">
         Connect your CRM.<br />
-        <span style="color:#1E40AF">Know your pipeline in 30 minutes.</span>
+        <span style="color:#1E40AF">Know your pipeline in <span class="underline">minutes</span>.</span>
       </h2>
       <p class="how-sub">No implementation project. No consultants. No new process for your reps.</p>
     </div>
@@ -113,19 +120,9 @@ const trust = [
 
           <div class="step-meta">
             <span class="step-num">{s.n}</span>
-            <span class="step-time" style={`color:${s.timeColor}; background:${s.timeColor}18`}>{s.time}</span>
+            <span class="step-time">{s.time}</span>
           </div>
 
-          {i === 0 && (
-            <div class="step-logos">
-              {tools.map(t => (
-                <div class="step-logo-chip">
-                  <span class="step-logo-icon" set:html={t.svg} />
-                  <span class="step-logo-name">{t.name}</span>
-                </div>
-              ))}
-            </div>
-          )}
 
           <div class="step-icon">{s.n === '01' ? '🔌' : s.n === '02' ? '🧠' : '🎯'}</div>
           <h3 class="step-title">{s.title}</h3>
@@ -137,11 +134,11 @@ const trust = [
 
           <div class="step-example">
             <div class="ex-label">{s.example.label}</div>
-            <div class="ex-grid">
+            <div class="ex-rows">
               {s.example.items.map(item => (
-                <div class="ex-stat">
-                  <span class="ex-val">{item.val}</span>
+                <div class="ex-row">
                   <span class="ex-key">{item.label}</span>
+                  <span class="ex-val">{item.val}</span>
                 </div>
               ))}
             </div>
@@ -203,8 +200,9 @@ const trust = [
   .step-meta { display: flex; align-items: center; justify-content: space-between; }
   .step-num { font-size: 2.25rem; font-weight: 800; color: #E2E8F0; line-height: 1; }
   .step-time {
-    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.07em; padding: 3px 10px; border-radius: 99px;
+    font-size: 0.7rem; font-weight: 600; color: #64748B;
+    background: #F1F5F9; border: 1px solid #E2E8F0;
+    padding: 3px 10px; border-radius: 99px; white-space: nowrap;
   }
 
   /* Logo chips (step 1 only) */
@@ -230,7 +228,7 @@ const trust = [
     font-size: 0.8rem; color: #475569; line-height: 1.5;
     padding-left: 14px; position: relative;
   }
-  .step-bullets li::before { content: '→'; position: absolute; left: 0; color: #1E40AF; font-weight: 700; font-size: 0.7rem; top: 1px; }
+  .step-bullets li::before { content: ''; width: 4px; height: 4px; background: #CBD5E1; border-radius: 50%; position: absolute; left: 1px; top: 7px; }
 
   .step-example {
     background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px;
@@ -238,10 +236,14 @@ const trust = [
     display: flex; flex-direction: column; gap: 8px;
   }
   .ex-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #94A3B8; }
-  .ex-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  .ex-stat { display: flex; flex-direction: column; gap: 1px; }
-  .ex-val  { font-size: 1.05rem; font-weight: 800; color: #1E40AF; line-height: 1.1; }
-  .ex-key  { font-size: 0.7rem; color: #64748B; line-height: 1.3; }
+  .ex-rows { display: flex; flex-direction: column; }
+  .ex-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; border-bottom: 1px solid #F1F5F9;
+  }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-key { font-size: 0.78rem; color: #64748B; }
+  .ex-val { font-size: 0.82rem; font-weight: 700; color: #0F172A; }
 
   /* Connectors (decorative, desktop only) */
   .step-connectors {

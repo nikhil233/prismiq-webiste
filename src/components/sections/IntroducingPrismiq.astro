@@ -2,26 +2,36 @@
 import Button from '../ui/Button.astro';
 import Tag from '../ui/Tag.astro';
 
-import hubspotSvg from '../../../prismIQ/hubspot.svg?raw';
-import zohoSvg    from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
-import zoomSvg    from '../../../prismIQ/zoom.svg?raw';
-import fireflyRaw from '../../../prismIQ/Fireflies.svg?raw';
-import slackSvg   from '../../../prismIQ/slack.svg?raw';
-import gmailSvg   from '../../../prismIQ/gmail.svg?raw';
-import readaiRaw  from '../../../prismIQ/ReadAI.svg?raw';
+import hubspotSvg     from '../../../prismIQ/hubspot.svg?raw';
+import zohoSvg        from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
+import zoomSvg        from '../../../prismIQ/zoom.svg?raw';
+import fireflyRaw     from '../../../prismIQ/Fireflies.svg?raw';
+import slackSvg       from '../../../prismIQ/slack.svg?raw';
+import gmailSvg       from '../../../prismIQ/gmail.svg?raw';
+import readaiRaw      from '../../../prismIQ/ReadAI.svg?raw';
+import otterRaw       from '../../../prismIQ/otter.svg?raw';
+import leadsquaredRaw from '../../../prismIQ/leadsquared.svg?raw';
+import salesforceRaw  from '../../../prismIQ/salesforce.svg?raw';
+import fathomRaw      from '../../../prismIQ/Fathom.svg?raw';
+import teamsRaw       from '../../../prismIQ/teams.svg?raw';
 
 const stackTools = [
-  { name: 'HubSpot',   svg: hubspotSvg },
-  { name: 'Zoho CRM',  svg: zohoSvg    },
-  { name: 'Zoom',      svg: zoomSvg    },
-  { name: 'Fireflies', svg: fireflyRaw },
-  { name: 'Slack',     svg: slackSvg   },
-  { name: 'Gmail',     svg: gmailSvg   },
-  { name: 'Read AI',   svg: readaiRaw  },
+  { name: 'HubSpot',     svg: hubspotSvg },
+  { name: 'Zoho CRM',    svg: zohoSvg    },
+  { name: 'Salesforce',  svg: salesforceRaw },
+  { name: 'Zoom',        svg: zoomSvg    },
+  { name: 'Fireflies',   svg: fireflyRaw },
+  { name: 'Otter AI',    svg: otterRaw   },
+  { name: 'Fathom',      svg: fathomRaw  },
+  { name: 'Slack',       svg: slackSvg   },
+  { name: 'Gmail',       svg: gmailSvg   },
+  { name: 'Read AI',     svg: readaiRaw  },
+  { name: 'LeadSquared', svg: leadsquaredRaw },
+  { name: 'Teams',       svg: teamsRaw   },
 ];
 
 const layers = [
-  { id: 'signal',  label: 'Signal Layer',  sub: 'Detects & ingests',   desc: 'Every CRM event, call recording, email open, deck view — captured and tagged.' },
+  { id: 'signal',  label: 'Signal Layer',  sub: 'Detects & ingests',   desc: 'Every CRM event, call recording, email open, deck view - captured and tagged.' },
   { id: 'context', label: 'Context Layer', sub: 'Understands & links',  desc: 'Cross-references signals per deal. Builds a live timeline of what actually happened.' },
   { id: 'action',  label: 'Action Layer',  sub: 'Prescribes & delivers', desc: 'Turns signals into specific next steps for each rep, each deal, each day.' },
 ];
@@ -31,9 +41,9 @@ const pillars = [
     icon: '👁',
     label: "What's happening",
     color: '#EFF6FF', border: '#BFDBFE',
-    desc: 'Full picture of every deal — call summaries, email threads, CRM signals, all cross-referenced in one timeline.',
+    desc: 'Full picture of every deal - call summaries, email threads, CRM signals, all cross-referenced in one timeline.',
     how: [
-      'Ingests signals from 7+ tools automatically — no manual logging',
+      'Ingests signals from 7+ tools automatically - no manual logging',
       'Builds per-deal timeline showing every touchpoint with source tags',
       'Highlights context gaps: new stakeholders, missed commitments, sentiment shifts',
     ],
@@ -64,9 +74,9 @@ const pillars = [
       badge: '₹68L at stake',
       badgeColor: 'red',
       items: [
-        { src: 'Score 21', text: 'Indus Fintech — no DM contact 12d' },
-        { src: 'Score 34', text: 'Nexora Solutions — legal blocking' },
-        { src: 'Score 47', text: 'Kalpana Systems — champion silent' },
+        { src: 'Score 21', text: 'Indus Fintech - no DM contact 12d' },
+        { src: 'Score 34', text: 'Nexora Solutions - legal blocking' },
+        { src: 'Score 47', text: 'Kalpana Systems - champion silent' },
       ],
     },
   },
@@ -74,10 +84,10 @@ const pillars = [
     icon: '🎯',
     label: 'What to do next',
     color: '#F0FDF4', border: '#BBF7D0',
-    desc: 'Context-specific next actions per deal, per rep. Not generic tips — your actual pipeline, prioritised by value and urgency.',
+    desc: 'Context-specific next actions per deal, per rep. Not generic tips - your actual pipeline, prioritised by value and urgency.',
     how: [
       'Extracts commitments from every call and tracks fulfilment automatically',
-      'Generates rep morning briefing before the day starts — ranked by urgency',
+      'Generates rep morning briefing before the day starts - ranked by urgency',
       'Coaching flags surface when talk ratios, next-step gaps, or close patterns drift',
     ],
     example: {
@@ -85,9 +95,9 @@ const pillars = [
       badge: '3 priorities',
       badgeColor: 'blue',
       items: [
-        { src: 'Urgent', text: 'Call Rohit — acknowledge CFO, ask for intro' },
+        { src: 'Urgent', text: 'Call Rohit - acknowledge CFO, ask for intro' },
         { src: 'Today',  text: 'Send Nexora revised pricing + ROI calculator' },
-        { src: 'Today',  text: 'Re-engage Indus Fintech — 12 days silent' },
+        { src: 'Today',  text: 'Re-engage Indus Fintech - 12 days silent' },
       ],
     },
   },
@@ -118,9 +128,8 @@ const outcomes = [
     </div>
 
     <!-- Architecture diagram -->
-    <div class="arch reveal-item" style="animation-delay:0.12s">
+    <!-- <div class="arch reveal-item hidden " style="animation-delay:0.12s">
 
-      <!-- Row 1: your stack -->
       <div class="arch-row arch-stack">
         <div class="arch-row-label">Your existing stack</div>
         <div class="arch-tools">
@@ -133,14 +142,12 @@ const outcomes = [
         </div>
       </div>
 
-      <!-- Connector -->
       <div class="arch-connector">
         <div class="arch-line"></div>
         <div class="arch-conn-label">ingests signals from every tool</div>
         <div class="arch-arrow">▼</div>
       </div>
 
-      <!-- Row 2: PrismIQ layer -->
       <div class="arch-row arch-prismiq">
         <div class="arch-row-label prismiq-label">PrismIQ Intelligence Layer</div>
         <div class="arch-layers">
@@ -154,14 +161,12 @@ const outcomes = [
         </div>
       </div>
 
-      <!-- Connector -->
       <div class="arch-connector">
         <div class="arch-line"></div>
         <div class="arch-conn-label">delivers to your team</div>
         <div class="arch-arrow">▼</div>
       </div>
 
-      <!-- Row 3: outputs -->
       <div class="arch-row arch-output">
         <div class="arch-row-label">Your team gets</div>
         <div class="arch-outputs">
@@ -180,7 +185,7 @@ const outcomes = [
         </div>
       </div>
 
-    </div>
+    </div> -->
 
     <!-- Pillar cards -->
     <div class="pillar-grid">
@@ -288,9 +293,7 @@ const outcomes = [
   .arch-layer {
     background: white; border: 1px solid #BFDBFE; border-radius: 11px; padding: 1rem 1.1rem;
   }
-  .arch-layer-signal  { border-left: 3px solid #3B82F6; }
-  .arch-layer-context { border-left: 3px solid #7C3AED; }
-  .arch-layer-action  { border-left: 3px solid #10B981; }
+  .arch-layer-signal, .arch-layer-context, .arch-layer-action { border-top: 2px solid #BFDBFE; }
   .al-label { font-size: 0.82rem; font-weight: 700; color: #0F172A; margin-bottom: 2px; }
   .al-sub   { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #94A3B8; margin-bottom: 6px; }
   .al-desc  { font-size: 0.78rem; color: #475569; line-height: 1.5; }
@@ -337,7 +340,7 @@ const outcomes = [
     font-size: 0.82rem; color: #475569; line-height: 1.5;
     padding-left: 14px; position: relative;
   }
-  .how-list li::before { content: '→'; position: absolute; left: 0; color: #1E40AF; font-weight: 700; font-size: 0.72rem; top: 1px; }
+  .how-list li::before { content: ''; width: 4px; height: 4px; background: #CBD5E1; border-radius: 50%; position: absolute; left: 1px; top: 7px; }
 
   .pillar-example {
     background: white; border-radius: 12px; padding: 12px 14px;

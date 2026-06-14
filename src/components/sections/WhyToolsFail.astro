@@ -12,20 +12,20 @@ const crmFields = [
 ];
 
 const signals = [
-  { src: 'Email',    icon: '📧', text: 'Pricing deck opened 3× on Jun 11 — 47 sec total view time', sev: 'warn' },
-  { src: 'Email',    icon: '📧', text: 'CFO added to thread — new stakeholder not in CRM', sev: 'danger' },
-  { src: 'CRM',      icon: '📊', text: 'Last rep email went unanswered — 4 days of silence', sev: 'danger' },
+  { src: 'Email',    icon: '📧', text: 'Pricing deck opened 3× on Jun 11 - 47 sec total view time', sev: 'warn' },
+  { src: 'Email',    icon: '📧', text: 'CFO added to thread - new stakeholder not in CRM', sev: 'danger' },
+  { src: 'CRM',      icon: '📊', text: 'Last rep email went unanswered - 4 days of silence', sev: 'danger' },
   { src: 'Call',     icon: '📞', text: 'Competitor "Salesken" mentioned on Jun 9 call recording', sev: 'warn' },
 ];
 
 const risks = [
   'No contact with decision-maker in 8 days',
-  'Demo rescheduled twice — second no-show likely',
+  'Demo rescheduled twice - second no-show likely',
   'Proposal viewed once, less than 1 min total',
 ];
 
 const actions = [
-  { urgency: 'Today', text: 'Call Rohit — acknowledge CFO addition, ask for 3-way intro' },
+  { urgency: 'Today', text: 'Call Rohit - acknowledge CFO addition, ask for 3-way intro' },
   { urgency: 'By EOD', text: 'Send updated pricing with ROI calculator attached' },
 ];
 
@@ -61,7 +61,7 @@ const sources = [
       </h2>
       <p class="wtf-sub">
         Your CRM is full. Your calendar is full. The signal is buried in the noise.
-        PrismIQ surfaces exactly what needs your attention — right now.
+        PrismIQ surfaces exactly what needs your attention - right now.
       </p>
     </div>
 
@@ -99,25 +99,35 @@ const sources = [
       <div class="wtf-panel wtf-bright">
         <div class="wtf-panel-header">
           <span class="panel-eyebrow bright-eye">What PrismIQ surfaces</span>
-          <span class="panel-badge bright-badge">AI · Updated live</span>
+          <span class="panel-badge bright-badge">Live</span>
         </div>
 
         <!-- Health score -->
         <div class="health-row">
-          <span class="health-label">Deal Health</span>
-          <div class="health-bar-wrap">
-            <div class="health-bar" style="width:34%"></div>
+          <div class="health-score-block">
+            <span class="health-num">34</span>
+            <span class="health-denom">/100</span>
           </div>
-          <span class="health-score">34 / 100</span>
-          <span class="health-tag">At Risk</span>
+          <div class="health-right">
+            <div class="health-top-row">
+              <span class="health-label">Deal Health Score</span>
+              <span class="health-tag">At Risk</span>
+            </div>
+            <div class="health-bar-wrap">
+              <div class="health-bar-seg seg-red" style="width:34%"></div>
+              <div class="health-bar-seg seg-empty"></div>
+            </div>
+            <div class="health-scale"><span>0</span><span>50</span><span>100</span></div>
+          </div>
         </div>
 
         <!-- Signals -->
         <div class="pi-block">
-          <div class="pi-block-title">Signals Detected</div>
+          <div class="pi-block-title">Signals Detected <span class="pi-count">4</span></div>
           <div class="pi-signals">
             {signals.map(s => (
               <div class={`pi-signal pi-signal-${s.sev}`}>
+                <span class={`pi-dot dot-${s.sev}`}></span>
                 <span class="pi-sig-src">{s.src}</span>
                 <span class="pi-sig-text">{s.text}</span>
               </div>
@@ -127,35 +137,33 @@ const sources = [
 
         <!-- Commitment gap -->
         <div class="pi-block">
-          <div class="pi-block-title">Commitment Gap</div>
+          <div class="pi-block-title">Open Commitment</div>
           <div class="pi-commit">
             <span class="commit-quote">"Send revised pricing by Wed"</span>
-            <span class="commit-src">— Jun 10 call · Kavya R.</span>
-            <span class="commit-status overdue">⚠ Overdue by 2 days</span>
+            <span class="commit-meta">Jun 10 · Kavya R.</span>
+            <span class="commit-overdue">Overdue by 2 days</span>
           </div>
         </div>
 
-        <!-- Risks -->
-        <div class="pi-block">
-          <div class="pi-block-title">Risk Factors</div>
-          <ul class="pi-risks">
-            {risks.map(r => <li>{r}</li>)}
-          </ul>
-        </div>
-
-        <!-- Actions -->
-        <div class="pi-actions">
-          {actions.map(a => (
-            <div class="pi-action">
-              <span class="pi-action-urgency">{a.urgency}</span>
-              <span class="pi-action-text">→ {a.text}</span>
+        <!-- Risks + Actions side by side -->
+        <div class="pi-two-col">
+          <div class="pi-block">
+            <div class="pi-block-title">Risk Factors</div>
+            <ul class="pi-risks">
+              {risks.map(r => <li>{r}</li>)}
+            </ul>
+          </div>
+          <div class="pi-block">
+            <div class="pi-block-title">Suggested Actions</div>
+            <div class="pi-actions">
+              {actions.map((a, i) => (
+                <div class="pi-action">
+                  <span class={`pi-action-urgency urg-${i === 0 ? 'high' : 'med'}`}>{a.urgency}</span>
+                  <span class="pi-action-text">{a.text}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        <div class="panel-verdict bright-verdict">
-          <span>⚡</span>
-          <span>You know exactly what to do — and when.</span>
+          </div>
         </div>
       </div>
 
@@ -207,19 +215,19 @@ const sources = [
     display: flex; flex-direction: column; gap: 1.25rem;
   }
   .wtf-dim   { background: white; }
-  .wtf-bright { background: #EFF6FF; border-color: #BFDBFE; }
+  .wtf-bright { background: white; }
 
   .wtf-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .panel-eyebrow {
     font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
   }
   .dim-eye    { color: #94A3B8; }
-  .bright-eye { color: #1E40AF; }
+  .bright-eye { color: #0F172A; }
   .panel-badge {
     font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 99px;
   }
   .dim-badge    { background: #F1F5F9; color: #94A3B8; }
-  .bright-badge { background: #DBEAFE; color: #1E40AF; }
+  .bright-badge { background: #F1F5F9; color: #475569; }
 
   /* CRM record */
   .crm-record { display: flex; flex-direction: column; gap: 0; }
@@ -234,63 +242,83 @@ const sources = [
 
   /* Health score */
   .health-row {
-    display: flex; align-items: center; gap: 8px;
-    background: white; border: 1px solid #BFDBFE; border-radius: 10px; padding: 10px 14px;
+    display: flex; align-items: center; gap: 14px;
+    background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 12px 14px;
   }
-  .health-label { font-size: 0.75rem; font-weight: 700; color: #1E40AF; white-space: nowrap; }
-  .health-bar-wrap { flex: 1; height: 6px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
-  .health-bar { height: 100%; background: #EF4444; border-radius: 99px; }
-  .health-score { font-size: 0.75rem; font-weight: 700; color: #0F172A; white-space: nowrap; }
-  .health-tag { font-size: 0.68rem; font-weight: 700; background: #FEF2F2; color: #DC2626; padding: 2px 7px; border-radius: 99px; white-space: nowrap; }
+  .health-score-block { display: flex; align-items: baseline; gap: 2px; flex-shrink: 0; }
+  .health-num  { font-size: 2rem; font-weight: 800; color: #EF4444; line-height: 1; letter-spacing: -0.04em; }
+  .health-denom { font-size: 0.78rem; font-weight: 500; color: #94A3B8; }
+  .health-right { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+  .health-top-row { display: flex; align-items: center; justify-content: space-between; }
+  .health-label { font-size: 0.75rem; font-weight: 600; color: #475569; }
+  .health-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #FEF2F2; color: #DC2626; padding: 2px 7px; border-radius: 4px; }
+  .health-bar-wrap { display: flex; height: 6px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
+  .health-bar-seg { height: 100%; }
+  .seg-red   { background: linear-gradient(90deg, #EF4444, #F97316); }
+  .seg-empty { flex: 1; }
+  .health-scale { display: flex; justify-content: space-between; font-size: 0.6rem; color: #CBD5E1; }
 
   /* PI blocks */
-  .pi-block { display: flex; flex-direction: column; gap: 6px; }
-  .pi-block-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #1E40AF; }
+  .pi-block { display: flex; flex-direction: column; gap: 7px; }
+  .pi-block-title {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #94A3B8;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pi-count {
+    background: #E2E8F0; color: #64748B; font-size: 0.6rem; font-weight: 700;
+    padding: 1px 5px; border-radius: 99px;
+  }
 
-  .pi-signals { display: flex; flex-direction: column; gap: 5px; }
+  .pi-signals { display: flex; flex-direction: column; }
   .pi-signal {
-    display: flex; align-items: baseline; gap: 7px;
-    border-radius: 8px; padding: 6px 10px; font-size: 0.8rem; line-height: 1.45;
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0; border-bottom: 1px solid #F1F5F9; font-size: 0.8rem; line-height: 1.45;
   }
-  .pi-signal-danger { background: #FEF2F2; color: #1E293B; }
-  .pi-signal-warn   { background: #FFFBEB; color: #1E293B; }
+  .pi-signal:last-child { border-bottom: none; }
+  .pi-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .dot-danger { background: #EF4444; }
+  .dot-warn   { background: #F59E0B; }
   .pi-sig-src {
-    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-    color: #94A3B8; white-space: nowrap; flex-shrink: 0;
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    white-space: nowrap; flex-shrink: 0; min-width: 32px;
   }
+  .pi-signal-danger .pi-sig-src { color: #EF4444; }
+  .pi-signal-warn   .pi-sig-src { color: #F59E0B; }
+  .pi-sig-text { color: #334155; }
 
   .pi-commit {
-    background: white; border: 1px solid #BFDBFE; border-radius: 9px; padding: 10px 12px;
+    border-left: 3px solid #F59E0B; background: #FFFBEB;
+    border-radius: 0 8px 8px 0; padding: 9px 12px;
     display: flex; flex-direction: column; gap: 3px;
   }
-  .commit-quote { font-size: 0.82rem; font-weight: 600; color: #1E3A8A; font-style: italic; }
-  .commit-src   { font-size: 0.72rem; color: #64748B; }
-  .commit-status { font-size: 0.72rem; font-weight: 700; }
-  .overdue { color: #DC2626; }
+  .commit-quote   { font-size: 0.82rem; font-weight: 500; color: #334155; }
+  .commit-meta    { font-size: 0.7rem; color: #94A3B8; }
+  .commit-overdue { font-size: 0.7rem; font-weight: 700; color: #D97706; }
 
-  .pi-risks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+  .pi-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .pi-risks { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
   .pi-risks li {
-    font-size: 0.8rem; color: #475569; padding-left: 14px; position: relative; line-height: 1.45;
+    font-size: 0.78rem; color: #475569; padding: 5px 0 5px 13px; position: relative; line-height: 1.45;
+    border-bottom: 1px solid #F1F5F9;
   }
-  .pi-risks li::before { content: '•'; position: absolute; left: 0; color: #EF4444; font-weight: 700; }
+  .pi-risks li:last-child { border-bottom: none; }
+  .pi-risks li::before { content: ''; width: 5px; height: 5px; background: #FCA5A5; border-radius: 50%; position: absolute; left: 0; top: 11px; }
 
   .pi-actions { display: flex; flex-direction: column; gap: 6px; }
-  .pi-action {
-    display: flex; align-items: baseline; gap: 8px;
-    background: #1E40AF; border-radius: 9px; padding: 9px 12px;
-  }
+  .pi-action { display: flex; flex-direction: column; gap: 2px; padding: 6px 8px; border-radius: 6px; background: #F8FAFC; border: 1px solid #E2E8F0; }
   .pi-action-urgency {
-    font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em;
-    background: rgba(255,255,255,0.18); color: white; padding: 2px 6px; border-radius: 4px; flex-shrink: 0;
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
   }
-  .pi-action-text { font-size: 0.8rem; font-weight: 600; color: white; line-height: 1.4; }
+  .urg-high { color: #EF4444; }
+  .urg-med  { color: #F59E0B; }
+  .pi-action-text { font-size: 0.76rem; color: #334155; line-height: 1.4; }
 
   .panel-verdict {
     display: flex; gap: 0.5rem; align-items: center;
     font-size: 0.8rem; font-weight: 600; padding: 0.65rem 0.9rem; border-radius: 9px;
   }
-  .dim-verdict    { background: #F1F5F9; color: #64748B; }
-  .bright-verdict { background: #DBEAFE; color: #1E40AF; }
+  .dim-verdict { background: #F1F5F9; color: #64748B; }
 
   /* VS divider */
   .wtf-vs { display: flex; flex-direction: column; align-items: center; padding-top: 2.5rem; gap: 6px; }
@@ -325,7 +353,7 @@ const sources = [
   .source-signals li {
     font-size: 0.78rem; color: #64748B; padding-left: 12px; position: relative; line-height: 1.4;
   }
-  .source-signals li::before { content: '·'; position: absolute; left: 0; color: #3B82F6; font-weight: 700; }
+  .source-signals li::before { content: ''; width: 4px; height: 4px; background: #CBD5E1; border-radius: 50%; position: absolute; left: 1px; top: 6px; }
   .source-count {
     font-size: 0.72rem; font-weight: 700; color: #1E40AF;
     background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 99px;

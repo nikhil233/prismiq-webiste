@@ -3,35 +3,35 @@ const days = [
   {
     name: 'Mon',
     events: [
-      { time: '9:00 AM', title: 'Indus Fintech gone cold', detail: 'No activity in 12 days — nobody flagged it', type: 'danger' },
-      { time: '2:00 PM', title: 'Quote sent, no reply',   detail: 'Proposal from last week — no follow-up nudge', type: 'warn' },
+      { time: '9:00 AM', title: 'Indus Fintech gone cold', detail: 'No activity in 12 days - nobody flagged it', type: 'danger' },
+      { time: '2:00 PM', title: 'Quote sent, no reply',   detail: 'Proposal from last week - no follow-up nudge', type: 'warn' },
     ],
   },
   {
     name: 'Tue',
     events: [
       { time: '10:00 AM', title: 'Nexora demo went well',   detail: 'But decision-maker still not looped in', type: 'warn' },
-      { time: '3:00 PM',  title: 'Pricing deck viewed 3×',  detail: 'No alert triggered — rep has no idea', type: 'danger' },
+      { time: '3:00 PM',  title: 'Pricing deck viewed 3×',  detail: 'No alert triggered - rep has no idea', type: 'danger' },
     ],
   },
   {
     name: 'Wed',
     events: [
-      { time: '9:30 AM', title: 'Kalpana no-show (again)', detail: 'Second reschedule — deal quietly stalling', type: 'danger' },
-      { time: '1:00 PM', title: 'Legal blocks deal',        detail: 'Champion went silent — not tracked anywhere', type: 'danger' },
+      { time: '9:30 AM', title: 'Kalpana no-show (again)', detail: 'Second reschedule - deal quietly stalling', type: 'danger' },
+      { time: '1:00 PM', title: 'Legal blocks deal',        detail: 'Champion went silent - not tracked anywhere', type: 'danger' },
     ],
   },
   {
     name: 'Thu',
     events: [
-      { time: '11:00 AM', title: '5 follow-ups overdue',  detail: 'All committed on calls — never sent', type: 'danger' },
-      { time: '2:30 PM',  title: '2h on forecast prep',   detail: 'Manual CRM export — still mostly guesswork', type: 'warn' },
+      { time: '11:00 AM', title: '5 follow-ups overdue',  detail: 'All committed on calls - never sent', type: 'danger' },
+      { time: '2:30 PM',  title: '2h on forecast prep',   detail: 'Manual CRM export - still mostly guesswork', type: 'warn' },
     ],
   },
   {
     name: 'Fri',
     events: [
-      { time: '3:00 PM', title: 'Pipeline review meeting', detail: '"How\'s the quarter?" — answered with a gut feel', type: 'warn' },
+      { time: '3:00 PM', title: 'Pipeline review meeting', detail: '"How\'s the quarter?" - answered with a gut feel', type: 'warn' },
       { time: '5:00 PM', title: '₹2.8Cr at risk, unseen', detail: 'Week ends. No one knew. Monday will be worse.', type: 'danger' },
     ],
   },
@@ -68,7 +68,7 @@ const pains = [
   {
     icon: '🙈',
     title: 'Flying blind into calls',
-    desc: "CRM shows the stage. Not what was promised on the last call — or what they're worried about.",
+    desc: "CRM shows the stage. Not what was promised on the last call - or what they're worried about.",
     detail: 'Reps spend avg 18 min re-reading notes before each call. Still miss key context.',
     freq: 'Every call',
     accent: '#EF4444',
@@ -96,9 +96,6 @@ const pains = [
         This is what your week<br />
         <span style="color: #1E40AF">actually looks like.</span>
       </h2>
-      <p class="brutal-sub">
-        Every sales team we talk to recognises all four of these. Every single one.
-      </p>
     </div>
 
     <!-- Week timeline -->
@@ -129,6 +126,9 @@ const pains = [
         </div>
       ))}
     </div>
+
+    <!-- Bridge line -->
+    <p class="brutal-bridge reveal-item">Every sales team we talk to recognises all four of these. Every single one.</p>
 
     <!-- Pain cards -->
     <div class="brutal-grid">
@@ -167,9 +167,14 @@ const pains = [
   .brutal-h2 {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700; line-height: 1.15;
-    letter-spacing: -0.02em; color: #0F172A; margin: 0 0 1rem;
+    letter-spacing: -0.02em; color: #0F172A; margin: 0 0 0.5rem;
   }
   .brutal-sub { font-size: 1.1rem; color: #64748B; line-height: 1.6; margin: 0; }
+  .brutal-bridge {
+    font-size: 0.88rem; color: #94A3B8; line-height: 1.6;
+    margin: -1.5rem 0 1.5rem;
+    padding-left: 2px;
+  }
 
   /* ── Week timeline ── */
   .week-grid {
@@ -194,14 +199,10 @@ const pains = [
   .wev {
     border-radius: 10px; padding: 9px 11px;
     display: flex; flex-direction: column; gap: 2px;
-    border-left: 3px solid transparent;
+    border: 1px solid #E2E8F0;
   }
-  .wev-danger {
-    background: #FEF2F2; border-left-color: #EF4444;
-  }
-  .wev-warn {
-    background: #FFFBEB; border-left-color: #F59E0B;
-  }
+  .wev-danger { background: #FEF2F2; }
+  .wev-warn   { background: #FFFBEB; }
   .wev-time {
     font-size: 0.65rem; font-weight: 600;
     color: #94A3B8; letter-spacing: 0.03em;
@@ -275,8 +276,8 @@ const pains = [
     font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
     letter-spacing: 0.06em; padding: 3px 8px; border-radius: 99px;
   }
-  .pain-tag.red   { background: #FEF2F2; color: #DC2626; }
-  .pain-tag.amber { background: #FFFBEB; color: #D97706; }
+  .pain-tag.red   { background: #F1F5F9; color: #475569; }
+  .pain-tag.amber { background: #F1F5F9; color: #475569; }
   .pain-title { font-size: 1.05rem; font-weight: 700; color: #0F172A; margin: 0 0 0.5rem; }
   .pain-desc  { font-size: 0.88rem; color: #64748B; line-height: 1.6; margin: 0 0 0.75rem; }
   .pain-detail {
