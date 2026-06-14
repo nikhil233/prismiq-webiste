@@ -2,34 +2,109 @@
 import Button from '../ui/Button.astro';
 import Tag from '../ui/Tag.astro';
 
+import hubspotSvg from '../../../prismIQ/hubspot.svg?raw';
+import zohoSvg    from '../../../prismIQ/ZOHO_logo_2023.svg?raw';
+import zoomSvg    from '../../../prismIQ/zoom.svg?raw';
+import fireflyRaw from '../../../prismIQ/Fireflies.svg?raw';
+import slackSvg   from '../../../prismIQ/slack.svg?raw';
+import gmailSvg   from '../../../prismIQ/gmail.svg?raw';
+import readaiRaw  from '../../../prismIQ/ReadAI.svg?raw';
+
+const stackTools = [
+  { name: 'HubSpot',   svg: hubspotSvg },
+  { name: 'Zoho CRM',  svg: zohoSvg    },
+  { name: 'Zoom',      svg: zoomSvg    },
+  { name: 'Fireflies', svg: fireflyRaw },
+  { name: 'Slack',     svg: slackSvg   },
+  { name: 'Gmail',     svg: gmailSvg   },
+  { name: 'Read AI',   svg: readaiRaw  },
+];
+
+const layers = [
+  { id: 'signal',  label: 'Signal Layer',  sub: 'Detects & ingests',   desc: 'Every CRM event, call recording, email open, deck view — captured and tagged.' },
+  { id: 'context', label: 'Context Layer', sub: 'Understands & links',  desc: 'Cross-references signals per deal. Builds a live timeline of what actually happened.' },
+  { id: 'action',  label: 'Action Layer',  sub: 'Prescribes & delivers', desc: 'Turns signals into specific next steps for each rep, each deal, each day.' },
+];
+
 const pillars = [
   {
     icon: '👁',
     label: "What's happening",
-    desc: 'Full picture of every deal — call summaries, email threads, CRM signals, all cross-referenced.',
-    color: '#EFF6FF',
-    border: '#BFDBFE',
+    color: '#EFF6FF', border: '#BFDBFE',
+    desc: 'Full picture of every deal — call summaries, email threads, CRM signals, all cross-referenced in one timeline.',
+    how: [
+      'Ingests signals from 7+ tools automatically — no manual logging',
+      'Builds per-deal timeline showing every touchpoint with source tags',
+      'Highlights context gaps: new stakeholders, missed commitments, sentiment shifts',
+    ],
+    example: {
+      company: 'Nexora Solutions',
+      badge: '4 signals · 48h',
+      badgeColor: 'amber',
+      items: [
+        { src: 'Email',  text: 'Pricing deck opened 3× on Jun 11' },
+        { src: 'CRM',    text: 'CFO added to email thread' },
+        { src: 'Call',   text: 'Competitor "Salesken" mentioned' },
+        { src: 'CRM',    text: 'No rep activity in 5 days' },
+      ],
+    },
   },
   {
     icon: '⚡',
     label: "What's at risk",
-    desc: 'Deals flagged before they go cold. Risk scored across recency, commitment, and engagement signals.',
-    color: '#FEF3C7',
-    border: '#FDE68A',
+    color: '#FFFBEB', border: '#FDE68A',
+    desc: 'Deals flagged before they go cold. Risk scored across recency, commitment fulfilment, and engagement patterns.',
+    how: [
+      'Scores every deal 0–100 across 6 risk dimensions in real time',
+      'Surfaces at-risk deals avg 5 days earlier than manual pipeline review',
+      'Weekly risk digest auto-sent to manager every Monday morning',
+    ],
+    example: {
+      company: 'This week · 3 at-risk deals',
+      badge: '₹68L at stake',
+      badgeColor: 'red',
+      items: [
+        { src: 'Score 21', text: 'Indus Fintech — no DM contact 12d' },
+        { src: 'Score 34', text: 'Nexora Solutions — legal blocking' },
+        { src: 'Score 47', text: 'Kalpana Systems — champion silent' },
+      ],
+    },
   },
   {
     icon: '🎯',
     label: 'What to do next',
-    desc: 'Context-specific next actions per deal, per rep. Not generic tips — your actual pipeline, today.',
-    color: '#F0FDF4',
-    border: '#BBF7D0',
+    color: '#F0FDF4', border: '#BBF7D0',
+    desc: 'Context-specific next actions per deal, per rep. Not generic tips — your actual pipeline, prioritised by value and urgency.',
+    how: [
+      'Extracts commitments from every call and tracks fulfilment automatically',
+      'Generates rep morning briefing before the day starts — ranked by urgency',
+      'Coaching flags surface when talk ratios, next-step gaps, or close patterns drift',
+    ],
+    example: {
+      company: 'Kavya R. · Today',
+      badge: '3 priorities',
+      badgeColor: 'blue',
+      items: [
+        { src: 'Urgent', text: 'Call Rohit — acknowledge CFO, ask for intro' },
+        { src: 'Today',  text: 'Send Nexora revised pricing + ROI calculator' },
+        { src: 'Today',  text: 'Re-engage Indus Fintech — 12 days silent' },
+      ],
+    },
   },
+];
+
+const outcomes = [
+  { num: '5 days',  label: 'earlier risk detection',     sub: 'vs manual pipeline reviews' },
+  { num: '91%',     label: 'commitment capture rate',     sub: 'from call recordings automatically' },
+  { num: '3×',      label: 'faster deal review',          sub: 'vs digging through CRM manually' },
+  { num: '0',       label: 'missed follow-ups',           sub: 'when reps use the daily briefing' },
 ];
 ---
 
 <section class="intro-section" data-reveal>
   <div class="content-width intro-inner">
 
+    <!-- Header -->
     <div class="intro-header reveal-item">
       <Tag color="violet">New Category</Tag>
       <h2 class="intro-h2">
@@ -42,21 +117,122 @@ const pillars = [
       </p>
     </div>
 
+    <!-- Architecture diagram -->
+    <div class="arch reveal-item" style="animation-delay:0.12s">
+
+      <!-- Row 1: your stack -->
+      <div class="arch-row arch-stack">
+        <div class="arch-row-label">Your existing stack</div>
+        <div class="arch-tools">
+          {stackTools.map(t => (
+            <div class="arch-tool">
+              <span class="arch-tool-logo" set:html={t.svg} />
+              <span class="arch-tool-name">{t.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Connector -->
+      <div class="arch-connector">
+        <div class="arch-line"></div>
+        <div class="arch-conn-label">ingests signals from every tool</div>
+        <div class="arch-arrow">▼</div>
+      </div>
+
+      <!-- Row 2: PrismIQ layer -->
+      <div class="arch-row arch-prismiq">
+        <div class="arch-row-label prismiq-label">PrismIQ Intelligence Layer</div>
+        <div class="arch-layers">
+          {layers.map(l => (
+            <div class={`arch-layer arch-layer-${l.id}`}>
+              <div class="al-label">{l.label}</div>
+              <div class="al-sub">{l.sub}</div>
+              <div class="al-desc">{l.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Connector -->
+      <div class="arch-connector">
+        <div class="arch-line"></div>
+        <div class="arch-conn-label">delivers to your team</div>
+        <div class="arch-arrow">▼</div>
+      </div>
+
+      <!-- Row 3: outputs -->
+      <div class="arch-row arch-output">
+        <div class="arch-row-label">Your team gets</div>
+        <div class="arch-outputs">
+          <div class="arch-out">
+            <span class="ao-icon">👁</span>
+            <span class="ao-label">What's happening</span>
+          </div>
+          <div class="arch-out">
+            <span class="ao-icon">⚡</span>
+            <span class="ao-label">What's at risk</span>
+          </div>
+          <div class="arch-out">
+            <span class="ao-icon">🎯</span>
+            <span class="ao-label">What to do next</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pillar cards -->
     <div class="pillar-grid">
       {pillars.map((p, i) => (
         <div
           class="pillar-card reveal-item"
-          style={`background:${p.color}; border-color:${p.border}; animation-delay:${0.1 + i*0.12}s`}
+          style={`background:${p.color}; border-color:${p.border}; animation-delay:${0.18 + i*0.1}s`}
         >
-          <div class="pillar-icon">{p.icon}</div>
-          <h3 class="pillar-label">{p.label}</h3>
+          <div class="pillar-top">
+            <span class="pillar-icon">{p.icon}</span>
+            <h3 class="pillar-label">{p.label}</h3>
+          </div>
           <p class="pillar-desc">{p.desc}</p>
+
+          <div class="pillar-how">
+            <div class="how-title">How it works</div>
+            <ul class="how-list">
+              {p.how.map(h => <li>{h}</li>)}
+            </ul>
+          </div>
+
+          <div class="pillar-example">
+            <div class="ex-header">
+              <span class="ex-company">{p.example.company}</span>
+              <span class={`ex-badge ex-${p.example.badgeColor}`}>{p.example.badge}</span>
+            </div>
+            <div class="ex-items">
+              {p.example.items.map(item => (
+                <div class="ex-item">
+                  <span class="ex-src">{item.src}</span>
+                  <span class="ex-text">{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       ))}
     </div>
 
-    <div class="intro-cta reveal-item" style="animation-delay:0.4s">
-      <Button href="#dashboard" variant="primary">See the Platform</Button>
+    <!-- Outcome stats -->
+    <div class="outcomes reveal-item" style="animation-delay:0.45s">
+      {outcomes.map(o => (
+        <div class="outcome">
+          <span class="out-num">{o.num}</span>
+          <span class="out-label">{o.label}</span>
+          <span class="out-sub">{o.sub}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="intro-cta reveal-item" style="animation-delay:0.55s">
+      <Button href="#design-partner" variant="primary">Join the Waitlist</Button>
     </div>
 
   </div>
@@ -67,47 +243,150 @@ const pillars = [
   .intro-inner { max-width: 1280px; margin: auto; }
 
   .intro-header {
-    text-align: center;
-    max-width: 680px;
-    margin: 0 auto 3.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
+    text-align: center; max-width: 720px; margin: 0 auto 3.5rem;
+    display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
   }
   .intro-h2 {
-    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    color: #0F172A;
-    margin: 0;
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem); font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.15; color: #0F172A; margin: 0;
   }
-  .intro-sub { font-size: 1.1rem; color: #64748B; line-height: 1.65; margin: 0; }
+  .intro-sub { font-size: 1.05rem; color: #64748B; line-height: 1.65; margin: 0; }
 
+  /* ── Architecture diagram ── */
+  .arch {
+    background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 20px;
+    padding: 2rem; margin-bottom: 3rem;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .arch-row {
+    border-radius: 14px; padding: 1.25rem 1.5rem;
+    border: 1px solid #E2E8F0;
+  }
+  .arch-stack  { background: white; }
+  .arch-prismiq { background: #EFF6FF; border-color: #BFDBFE; }
+  .arch-output { background: white; }
+
+  .arch-row-label {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #94A3B8; margin-bottom: 1rem;
+  }
+  .prismiq-label { color: #1E40AF; }
+
+  .arch-tools { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
+  .arch-tool {
+    display: flex; align-items: center; gap: 7px;
+    background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 10px; padding: 6px 12px 6px 8px;
+  }
+  .arch-tool-logo {
+    width: 20px; height: 20px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .arch-tool-logo > svg { width: 100%; height: 100%; display: block; }
+  .arch-tool-name { font-size: 0.78rem; font-weight: 600; color: #475569; white-space: nowrap; }
+
+  .arch-layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .arch-layer {
+    background: white; border: 1px solid #BFDBFE; border-radius: 11px; padding: 1rem 1.1rem;
+  }
+  .arch-layer-signal  { border-left: 3px solid #3B82F6; }
+  .arch-layer-context { border-left: 3px solid #7C3AED; }
+  .arch-layer-action  { border-left: 3px solid #10B981; }
+  .al-label { font-size: 0.82rem; font-weight: 700; color: #0F172A; margin-bottom: 2px; }
+  .al-sub   { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #94A3B8; margin-bottom: 6px; }
+  .al-desc  { font-size: 0.78rem; color: #475569; line-height: 1.5; }
+
+  .arch-outputs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .arch-out {
+    display: flex; align-items: center; gap: 8px;
+    background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 99px; padding: 6px 14px;
+  }
+  .ao-icon  { font-size: 1rem; }
+  .ao-label { font-size: 0.82rem; font-weight: 600; color: #0F172A; }
+
+  .arch-connector {
+    display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0;
+  }
+  .arch-line { width: 1px; height: 16px; background: #CBD5E1; }
+  .arch-conn-label { font-size: 0.68rem; color: #94A3B8; font-weight: 500; }
+  .arch-arrow { font-size: 0.7rem; color: #3B82F6; }
+
+  /* ── Pillar cards ── */
   .pillar-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-    margin-bottom: 2.5rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem; margin-bottom: 2.5rem;
   }
-
   .pillar-card {
-    border: 1px solid;
-    border-radius: 16px;
-    padding: 2rem;
+    border: 1px solid; border-radius: 18px; padding: 1.75rem;
+    display: flex; flex-direction: column; gap: 1.1rem;
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
 
-  .pillar-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .pillar-label { font-size: 1.1rem; font-weight: 600; color: #0F172A; margin: 0 0 0.6rem; }
-  .pillar-desc { font-size: 0.9rem; color: #475569; line-height: 1.65; margin: 0; }
+  .pillar-top { display: flex; align-items: center; gap: 10px; }
+  .pillar-icon { font-size: 1.5rem; }
+  .pillar-label { font-size: 1.05rem; font-weight: 700; color: #0F172A; margin: 0; }
+  .pillar-desc { font-size: 0.88rem; color: #475569; line-height: 1.65; margin: 0; }
+
+  .pillar-how { display: flex; flex-direction: column; gap: 6px; }
+  .how-title {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: #94A3B8;
+  }
+  .how-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+  .how-list li {
+    font-size: 0.82rem; color: #475569; line-height: 1.5;
+    padding-left: 14px; position: relative;
+  }
+  .how-list li::before { content: '→'; position: absolute; left: 0; color: #1E40AF; font-weight: 700; font-size: 0.72rem; top: 1px; }
+
+  .pillar-example {
+    background: white; border-radius: 12px; padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .ex-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .ex-company { font-size: 0.78rem; font-weight: 700; color: #0F172A; }
+  .ex-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; white-space: nowrap; }
+  .ex-red   { background: #FEF2F2; color: #DC2626; }
+  .ex-amber { background: #FFFBEB; color: #D97706; }
+  .ex-blue  { background: #EFF6FF; color: #1E40AF; }
+  .ex-items { display: flex; flex-direction: column; gap: 4px; }
+  .ex-item { display: flex; align-items: baseline; gap: 7px; }
+  .ex-src {
+    font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+    color: #94A3B8; white-space: nowrap; flex-shrink: 0; min-width: 46px;
+  }
+  .ex-text { font-size: 0.78rem; color: #334155; line-height: 1.4; }
+
+  /* ── Outcome stats ── */
+  .outcomes {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: #E2E8F0;
+    border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  .outcome {
+    background: #F8FAFC; padding: 1.5rem 1.75rem;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .out-num   { font-size: clamp(1.75rem, 3vw, 2.4rem); font-weight: 800; color: #1E40AF; letter-spacing: -0.03em; line-height: 1; }
+  .out-label { font-size: 0.88rem; font-weight: 600; color: #0F172A; }
+  .out-sub   { font-size: 0.75rem; color: #94A3B8; line-height: 1.4; }
 
   .intro-cta { text-align: center; }
 
   .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .arch-layers { grid-template-columns: 1fr; }
+    .outcomes { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .arch-outputs { flex-direction: column; }
+    .outcomes { grid-template-columns: repeat(2, 1fr); }
+    .outcome { padding: 1rem 1.25rem; }
+  }
 </style>
 
 <script>
