@@ -142,10 +142,18 @@ const stops = [
   .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px) {
+    .stop-section { padding: 4.5rem 1.25rem; }
     .stop-inner { grid-template-columns: 1fr; gap: 2rem; }
     .stop-item { grid-template-columns: 1fr; }
     .stop-before { border-right: none; border-bottom: 1px solid #F1F5F9; padding-bottom: 10px; }
     .stop-after { padding-top: 10px; }
+  }
+
+  @media (max-width: 640px) {
+    .stop-section { padding: 4rem 1rem; }
+    .stop-left { margin-bottom: 0; }
+    .stop-stats { flex-direction: row; gap: 0; }
+    .stop-impact { white-space: normal; }
   }
 </style>
 

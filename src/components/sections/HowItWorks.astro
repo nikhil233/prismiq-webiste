@@ -271,8 +271,18 @@ const trust = [
   .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px) {
+    .how-section { padding: 4.5rem 1.25rem; }
     .steps-grid { grid-template-columns: 1fr; }
+    .trust-row  { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .how-section { padding: 4rem 1rem; }
+    .how-header { margin-bottom: 2rem; }
     .trust-row  { grid-template-columns: 1fr; }
+    .step-logos { gap: 4px; }
+    .step-card  { padding: 1.25rem; }
+    .trust-stat { padding: 1rem; }
   }
 </style>
 

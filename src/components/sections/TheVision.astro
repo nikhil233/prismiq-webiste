@@ -134,6 +134,18 @@ const phases = [
 
   .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .vision-section { padding: 4.5rem 1.25rem; }
+    .vision-phases { grid-template-columns: 1fr; }
+    .vision-header { margin-bottom: 2.5rem; }
+  }
+
+  @media (max-width: 640px) {
+    .vision-section { padding: 4rem 1rem; }
+    .phase-card { padding: 1.5rem; }
+    .vision-header { margin-bottom: 2rem; }
+  }
 </style>
 
 <script>

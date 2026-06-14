@@ -108,7 +108,7 @@ export default function PersonaTabs() {
   const p = personas[active];
 
   return (
-    <section id="for-teams" style={{ background: '#0F172A', padding: '6rem 1.5rem' }}>
+    <section id="for-teams" className="ptab-section" style={{ background: '#0F172A' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
         {/* Header */}
@@ -189,6 +189,8 @@ export default function PersonaTabs() {
       </div>
 
       <style>{`
+        .ptab-section { padding: 6rem 1.5rem; }
+
         .ptab-shell {
           border: 1px solid #E2E8F0;
           border-radius: 16px;
@@ -381,13 +383,25 @@ export default function PersonaTabs() {
         }
 
         @media (max-width: 900px) {
-          .pcard-top { grid-template-columns: 1fr; }
+          .ptab-section { padding: 4.5rem 1.25rem; }
+          .pcard-top { grid-template-columns: 1fr; gap: 1rem; padding: 1.25rem; }
           .pcard-metric-block { align-items: flex-start; }
           .pcard-metric-sub { text-align: left; }
           .pcard-body { grid-template-columns: 1fr; }
           .pcard-divider { flex-direction: row; padding: 0 1.75rem; height: 32px; }
           .pcard-div-line { flex: 1; height: 1px; width: auto; }
           .pcard-brief { border-left: none; border-top: 1px solid #E2E8F0; }
+          .ptab-btn { padding: 10px 16px; font-size: 0.8rem; }
+        }
+
+        @media (max-width: 640px) {
+          .ptab-section { padding: 4rem 1rem; }
+          .pcard-top { padding: 1rem; }
+          .pcard-col { padding: 1rem; }
+          .pcard-brief { padding: 1rem; }
+          .pcard-metric-num { font-size: 1.75rem; }
+          .pcard-pain { font-size: 0.9rem; }
+          .ptab-btn { padding: 9px 12px; font-size: 0.78rem; }
         }
       `}</style>
     </section>

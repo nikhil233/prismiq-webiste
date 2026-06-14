@@ -129,6 +129,27 @@ const logos = [
     margin: 1.5rem 1.5rem 0;
     line-height: 1.5;
   }
+
+  @media (max-width: 640px) {
+    .intbar { padding: 1.75rem 0; }
+
+    .intbar-label { font-size: 0.7rem; margin-bottom: 1.25rem; }
+
+    /* Tighter fade on narrow screens so chips aren't hidden too early */
+    .marquee {
+      mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    }
+
+    .logo-chip {
+      padding: 6px 12px 6px 8px;
+      margin-right: 0.85rem;
+    }
+    .logo-icon { width: 18px; height: 18px; }
+    .logo-name { font-size: 0.72rem; }
+
+    .intbar-sub { font-size: 0.76rem; margin: 1.25rem 1rem 0; }
+  }
 </style>
 
 <script>

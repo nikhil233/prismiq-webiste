@@ -365,10 +365,23 @@ const sources = [
   .reveal-item.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px) {
+    .wtf-section { padding: 4.5rem 1.25rem; }
     .wtf-compare { grid-template-columns: 1fr; gap: 1rem; }
     .wtf-vs { flex-direction: row; padding-top: 0; }
     .vs-line { flex: 1; height: 1px; width: auto; min-height: unset; }
+    .sources-grid { grid-template-columns: repeat(2, 1fr); }
+    .pi-two-col { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .wtf-section { padding: 4rem 1rem; }
+    .wtf-header { margin-bottom: 2rem; }
     .sources-grid { grid-template-columns: 1fr; }
+    .pi-signals { overflow-x: visible; }
+    .pi-signal { flex-wrap: wrap; }
+    .health-row { flex-wrap: wrap; gap: 10px; }
+    .wtf-panel { padding: 1.25rem; }
+    .sources-strip { padding: 1.25rem; }
   }
 </style>
 
