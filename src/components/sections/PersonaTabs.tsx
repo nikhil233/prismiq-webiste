@@ -117,7 +117,7 @@ export default function PersonaTabs() {
             Whether you're running the company<br />
             <span style={{ color: '#60A5FA' }}>or the team.</span>
           </h2>
-          <p style={{ fontSize: '1rem', color: '#94A3B8', margin: 0, lineHeight: 1.6 }}>PrismIQ delivers a different view to every revenue role - same data, right context.</p>
+          <p style={{ fontSize: '1rem', color: '#94A3B8', margin: 0, lineHeight: 1.6 }}>Lumo delivers a different view to every revenue role - same data, right context.</p>
         </div>
 
         {/* Tab shell — tabs + panel in one bordered unit */}
@@ -157,7 +157,7 @@ export default function PersonaTabs() {
 
             {/* Left: stop doing */}
             <div className="pcard-col pcard-col-dim">
-              <div className="pcard-col-header pcard-col-header-dim">Without PrismIQ</div>
+              <div className="pcard-col-header pcard-col-header-dim">Without Lumo</div>
               <ul className="pcard-list pcard-list-dim">
                 {p.stops.map((s, i) => <li key={i}>{s}</li>)}
               </ul>
@@ -165,7 +165,7 @@ export default function PersonaTabs() {
 
             {/* Right: what they get */}
             <div className="pcard-col pcard-col-bright">
-              <div className="pcard-col-header pcard-col-header-bright">With PrismIQ</div>
+              <div className="pcard-col-header pcard-col-header-bright">With Lumo</div>
               <ul className="pcard-list pcard-list-bright">
                 {p.gets.map((g, i) => <li key={i}>{g}</li>)}
               </ul>

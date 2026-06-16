@@ -6,17 +6,17 @@ interface Props {
 }
 
 const {
-  title = 'PrismIQ - Revenue Execution Intelligence Platform',
-  description = 'PrismIQ integrates with your CRM and call recordings to surface what your sales team needs to act on before deals slip.',
+  title = 'Lumo - Revenue Execution Intelligence Platform',
+  description = 'Lumo integrates with your CRM and call recordings to surface what your sales team needs to act on before deals slip.',
   ogImage = '/og-image.png',
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://prismiq.com');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://lumo.com');
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "PrismIQ",
+  "name": "Lumo",
   "applicationCategory": "BusinessApplication",
   "description": description,
   "operatingSystem": "Web",
