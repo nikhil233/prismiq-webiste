@@ -1,0 +1,234 @@
+---
+import Tag from '../ui/Tag.astro';
+
+const reps = [
+  {
+    name: 'Kavya R.',
+    role: 'AE',
+    score: 74,
+    delta: '+6',
+    up: true,
+    flags: [
+      { text: 'Talk ratio 78% — leaving no space for prospect', type: 'warn' },
+      { text: 'Strong discovery questions across all calls', type: 'good' },
+    ],
+    action: 'Share active listening framework before next call',
+    tier: 'Improving',
+    tierColor: 'blue',
+  },
+  {
+    name: 'Rohit M.',
+    role: 'AE',
+    score: 88,
+    delta: '+2',
+    up: true,
+    flags: [
+      { text: 'Highest close rate on team this quarter', type: 'good' },
+      { text: 'Struggles on multi-stakeholder deals', type: 'warn' },
+    ],
+    action: 'Review multi-stakeholder playbook ahead of Kalpana call',
+    tier: 'Top Performer',
+    tierColor: 'green',
+  },
+  {
+    name: 'Sneha P.',
+    role: 'SDR',
+    score: 51,
+    delta: '-4',
+    up: false,
+    flags: [
+      { text: 'No confirmed next step in 4 of 7 calls this week', type: 'danger' },
+      { text: 'Follow-up rate dropped 30% vs last month', type: 'danger' },
+    ],
+    action: 'Always lock a date before ending the call',
+    tier: 'Needs Coaching',
+    tierColor: 'red',
+  },
+];
+---
+
+<section id="rep-intelligence" class="ri-section" data-reveal>
+  <div class="content-width ri-inner">
+
+    <div class="ri-header reveal-item">
+      <Tag color="blue">Rep Intelligence</Tag>
+      <h2 class="ri-h2">
+        Know how every rep is performing.<br />
+        <span style="color:#1E40AF">Without asking them.</span>
+      </h2>
+      <p class="ri-sub">
+        PrismIQ scores each rep weekly across calls, CRM activity, email, and meeting patterns.
+        Managers get coaching priorities. Reps get specific actions to improve.
+      </p>
+    </div>
+
+    <div class="ri-cards-header reveal-item" style="animation-delay:0.08s">
+      <span class="ri-eyebrow">Team performance this week</span>
+      <span class="ri-live-badge">● Updated today</span>
+    </div>
+
+    <div class="rep-grid">
+      {reps.map((r, i) => (
+        <div class="rep-card reveal-item" style={`animation-delay:${0.12 + i * 0.1}s`}>
+          <div class="rep-top">
+            <div class="rep-id">
+              <div class="rep-avatar">{r.name.charAt(0)}</div>
+              <div class="rep-meta">
+                <span class="rep-name">{r.name}</span>
+                <span class="rep-role">{r.role}</span>
+              </div>
+            </div>
+            <span class={`rep-tier tier-${r.tierColor}`}>{r.tier}</span>
+          </div>
+
+          <div class="rep-score-row">
+            <div class="rep-score-wrap">
+              <span class="rep-score">{r.score}</span>
+              <span class="rep-score-denom">/100</span>
+            </div>
+            <span class={`rep-delta ${r.up ? 'delta-up' : 'delta-down'}`}>
+              {r.up ? '↑' : '↓'} {r.delta} vs last week
+            </span>
+          </div>
+
+          <div class="rep-bar-wrap">
+            <div class="rep-bar-fill" style={`width:${r.score}%`}></div>
+          </div>
+
+          <div class="rep-flags">
+            {r.flags.map(f => (
+              <div class="rep-flag">
+                <span class={`flag-dot dot-${f.type}`}></span>
+                <span>{f.text}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="rep-action">
+            <span class="action-prefix">Coaching →</span>
+            <span class="action-text">{r.action}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .ri-section {
+    background: white;
+    padding: 6rem 1.5rem;
+    border-top: 1px solid #E2E8F0;
+  }
+  .ri-inner { max-width: 1280px; margin: auto; }
+
+  .ri-header {
+    max-width: 680px; margin-bottom: 2.5rem;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+  }
+  .ri-h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.15; color: #0F172A; margin: 0;
+  }
+  .ri-sub { font-size: 1.05rem; color: #64748B; line-height: 1.65; margin: 0; }
+
+  .ri-cards-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .ri-eyebrow {
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #94A3B8;
+  }
+  .ri-live-badge {
+    font-size: 0.68rem; font-weight: 600; color: #10B981;
+    background: #ECFDF5; padding: 2px 8px; border-radius: 99px;
+  }
+
+  /* ── Cards grid ── */
+  .rep-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .rep-card {
+    background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px;
+    padding: 1.25rem 1.35rem; display: flex; flex-direction: column; gap: 0.75rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .rep-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+
+  .rep-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .rep-id  { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .rep-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #1E40AF; color: white;
+    font-size: 0.78rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .rep-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .rep-name { font-size: 0.88rem; font-weight: 700; color: #0F172A; }
+  .rep-role { font-size: 0.65rem; color: #94A3B8; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .rep-tier {
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; padding: 3px 8px; border-radius: 99px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .tier-green { background: #ECFDF5; color: #059669; }
+  .tier-blue  { background: #EFF6FF; color: #1E40AF; }
+  .tier-red   { background: #FEF2F2; color: #DC2626; }
+
+  .rep-score-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .rep-score-wrap { display: flex; align-items: baseline; gap: 2px; }
+  .rep-score      { font-size: 2rem; font-weight: 800; color: #0F172A; letter-spacing: -0.04em; line-height: 1; }
+  .rep-score-denom { font-size: 0.75rem; color: #94A3B8; }
+  .rep-delta      { font-size: 0.72rem; font-weight: 600; }
+  .delta-up   { color: #059669; }
+  .delta-down { color: #EF4444; }
+
+  .rep-bar-wrap { height: 4px; background: #E2E8F0; border-radius: 99px; overflow: hidden; }
+  .rep-bar-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, #3B82F6, #1E40AF);
+  }
+
+  .rep-flags { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+  .rep-flag  { display: flex; align-items: flex-start; gap: 6px; font-size: 0.78rem; line-height: 1.4; color: #475569; }
+  .flag-dot  { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .dot-good   { background: #10B981; }
+  .dot-warn   { background: #F59E0B; }
+  .dot-danger { background: #EF4444; }
+
+  .rep-action {
+    display: flex; gap: 5px; flex-wrap: wrap;
+    font-size: 0.775rem; background: #EFF6FF; border: 1px solid #BFDBFE;
+    border-radius: 7px; padding: 8px 10px; color: #1E40AF; line-height: 1.45;
+    margin-top: auto;
+  }
+  .action-prefix { font-weight: 700; flex-shrink: 0; }
+
+  .reveal-item { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal-item.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .ri-section { padding: 4.5rem 1.25rem; }
+    .rep-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .ri-section { padding: 4rem 1rem; }
+    .ri-header  { margin-bottom: 2rem; }
+  }
+</style>
+
+<script>
+  const o = new IntersectionObserver(
+    (e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); },
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+</script>
