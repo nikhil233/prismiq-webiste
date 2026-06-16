@@ -50,8 +50,8 @@ const pathD = (i: number) => {
         <Tag color="blue">Revenue Execution Intelligence</Tag>
       </div>
       <h1 class="hero-h1 anim-delay-2">
-        Your entire sales stack.<br/>
-        <span class="hero-blue">One intelligence engine.</span>
+        Your Entire Sales Stack.<br/>
+        <span class="hero-blue">One Intelligence Engine.</span>
       </h1>
       <p class="hero-sub anim-delay-3">
         PrismIQ connects every tool your team uses, understands the signals,
@@ -70,7 +70,7 @@ const pathD = (i: number) => {
       <p class="hero-note anim-delay-5">
         <span class="hero-check">✓</span> Free during beta &nbsp;·&nbsp;
         <span class="hero-check">✓</span> No credit card &nbsp;·&nbsp;
-        <span class="hero-check">✓</span> 20 spots left
+        <span class="hero-check">✓</span> First 20 Teams
       </p>
     </div>
 
@@ -265,10 +265,10 @@ const pathD = (i: number) => {
               </div>
             </div>
 
-            <!-- Slide 2: Call Coaching -->
+            <!-- Slide 2: Rep Performance & Coaching -->
             <div class="oc-slide">
               <div class="oc-header">
-                <span class="oc-title">Call Coaching</span>
+                <span class="oc-title">Rep Performance & Coaching</span>
                 <span class="oc-week-badge">From this week's calls</span>
               </div>
               <div class="oc-items">
@@ -799,6 +799,17 @@ const pathD = (i: number) => {
 </style>
 
 <script>
+  // Lock waitlist form after its intro animation plays — prevents re-animation on focus/blur
+  (() => {
+    const form = document.querySelector('.hero-waitlist') as HTMLElement | null;
+    if (!form) return;
+    form.addEventListener('animationend', () => {
+      form.style.opacity = '1';
+      form.style.transform = 'none';
+      form.style.animation = 'none';
+    }, { once: true });
+  })();
+
   (() => {
     const wrap = document.getElementById('hero-oc');
     if (!wrap) return;

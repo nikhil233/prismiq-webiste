@@ -15,7 +15,7 @@ const signals = [
   { src: 'Email',    icon: '📧', text: 'Pricing deck opened 3× on Jun 11 - 47 sec total view time', sev: 'warn' },
   { src: 'Email',    icon: '📧', text: 'CFO added to thread - new stakeholder not in CRM', sev: 'danger' },
   { src: 'CRM',      icon: '📊', text: 'Last rep email went unanswered - 4 days of silence', sev: 'danger' },
-  { src: 'Call',     icon: '📞', text: 'Competitor "Salesken" mentioned on Jun 9 call recording', sev: 'warn' },
+  { src: 'Meeting',  icon: '🎙', text: 'Competitor "Salesken" mentioned on Jun 9 meeting recording', sev: 'warn' },
 ];
 
 const risks = [
@@ -37,7 +37,7 @@ const sources = [
     count: '4 signals this week',
   },
   {
-    icon: '📞',
+    icon: '🎙',
     name: 'From Calls & Meetings',
     signals: ['Commitments extracted', 'Objections logged', 'Competitor mentions', 'Sentiment scoring'],
     count: '7 signals this week',
@@ -98,7 +98,7 @@ const sources = [
       <!-- Right: PrismIQ intelligence -->
       <div class="wtf-panel wtf-bright">
         <div class="wtf-panel-header">
-          <span class="panel-eyebrow bright-eye">What PrismIQ surfaces</span>
+          <span class="panel-eyebrow bright-eye">What PrismIQ tells you</span>
           <span class="panel-badge bright-badge">Live</span>
         </div>
 

@@ -38,8 +38,8 @@ const days = [
 ];
 
 const stats = [
-  { num: '3',     label: 'deals went dark',       sub: 'No activity 10+ days, zero alerts' },
-  { num: '5',     label: 'follow-ups missed',      sub: 'Promised on calls, never sent' },
+  { num: '30%',   label: 'deals go dark',           sub: 'No activity 10+ days, zero alerts' },
+  { num: '47%',   label: 'follow-ups never sent',  sub: 'Promised on calls, never actioned' },
   { num: '₹2.8Cr', label: 'at risk, invisible',   sub: 'Not tracked, not visible to anyone' },
   { num: '2h+',   label: 'wasted on forecasting',  sub: 'Manual exports, stale by Tuesday' },
 ];
@@ -98,6 +98,7 @@ const pains = [
       </h2>
     </div>
 
+    <div class="">
     <!-- Week timeline -->
     <div class="week-grid reveal-item">
       {days.map(day => (
@@ -116,6 +117,8 @@ const pains = [
       ))}
     </div>
 
+    <p class="brutal-bridge reveal-item">Every sales team we talk to recognises all four of these. Every single one.</p>
+
     <!-- Pain stats -->
     <div class="pstats reveal-item">
       {stats.map(s => (
@@ -128,7 +131,6 @@ const pains = [
     </div>
 
     <!-- Bridge line -->
-    <p class="brutal-bridge reveal-item">Every sales team we talk to recognises all four of these. Every single one.</p>
 
     <!-- Pain cards -->
     <div class="brutal-grid">
@@ -151,6 +153,7 @@ const pains = [
         </div>
       ))}
     </div>
+    </div><!-- /brutal-board -->
 
   </div>
 </section>
@@ -162,6 +165,12 @@ const pains = [
     border-top: 1px solid #E2E8F0;
   }
   .brutal-inner { max-width: 1280px; margin: auto; }
+
+  .brutal-board {
+    border: 1px solid #E2E8F0;
+    border-radius: 20px;
+    padding: 1.5rem;
+  }
 
   .brutal-header { max-width: 640px; margin-bottom: 3rem; }
   .brutal-h2 {
