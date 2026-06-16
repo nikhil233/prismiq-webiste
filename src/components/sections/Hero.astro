@@ -810,6 +810,36 @@ const pathD = (i: number) => {
     }, { once: true });
   })();
 
+  // Waitlist form submission
+  (() => {
+    const form = document.querySelector('.hero-waitlist') as HTMLFormElement | null;
+    const btn  = form?.querySelector('.waitlist-btn') as HTMLButtonElement | null;
+    if (!form || !btn) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (form.querySelector('.waitlist-input') as HTMLInputElement).value.trim();
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
+
+      try {
+        await fetch('https://eo5hgc5lolylcki.m.pipedream.net', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        btn.textContent = '✓ You\'re on the list!';
+        btn.style.background = '#059669';
+        (form.querySelector('.waitlist-input') as HTMLInputElement).value = '';
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist →';
+      }
+    });
+  })();
+
   (() => {
     const wrap = document.getElementById('hero-oc');
     if (!wrap) return;

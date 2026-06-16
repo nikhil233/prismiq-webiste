@@ -55,6 +55,11 @@ const benefits = [
         </div>
 
         <div class="form-field">
+          <label class="form-label">Phone number</label>
+          <input name="phone" type="tel" required placeholder="+91 98765 43210" class="form-input" />
+        </div>
+
+        <div class="form-field">
           <label class="form-label">Company</label>
           <input name="company" type="text" required placeholder="Acme Inc." class="form-input" />
         </div>
@@ -225,4 +230,42 @@ const benefits = [
 <script>
   const o = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); }, { threshold: 0.1 });
   document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+
+  (() => {
+    const form = document.querySelector('.cta-form') as HTMLFormElement | null;
+    const btn  = form?.querySelector('.form-submit') as HTMLButtonElement | null;
+    if (!form || !btn) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const get = (n: string) => (form.querySelector(`[name="${n}"]`) as HTMLInputElement | HTMLSelectElement)?.value.trim() ?? '';
+      const email = get('email');
+      const phone = get('phone');
+      if (!email || !phone) return;
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      try {
+        await fetch('https://eo5hgc5lolylcki.m.pipedream.net', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            first_name:  get('first'),
+            last_name:   get('last'),
+            email,
+            phone,
+            company:     get('company'),
+            crm:         get('crm'),
+            team_size:   get('team-size'),
+          }),
+        });
+        btn.textContent = '✓ Application received!';
+        btn.style.background = '#059669';
+        form.querySelectorAll('input, select').forEach((el) => {
+          (el as HTMLInputElement | HTMLSelectElement).value = '';
+        });
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Join Waitlist →';
+      }
+    });
+  })();
 </script>
