@@ -115,4 +115,8 @@ const faqSchema = {
 <script>
   const o = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } }); }, { threshold: 0.1 });
   document.querySelectorAll('[data-reveal] .reveal-item').forEach(el => o.observe(el));
+
+  document.querySelector('.qa-cta a[href="#design-partner"]')?.addEventListener('click', () => {
+    window.posthog?.capture('questions_cta_clicked');
+  });
 </script>

@@ -257,6 +257,18 @@ const benefits = [
             team_size:   get('team-size'),
           }),
         });
+        window.posthog?.identify(email, {
+          email,
+          first_name: get('first'),
+          last_name:  get('last'),
+          phone,
+          company:    get('company'),
+        });
+        window.posthog?.capture('design_partner_form_submitted', {
+          crm:       get('crm'),
+          team_size: get('team-size'),
+          company:   get('company'),
+        });
         btn.textContent = '✓ Application received!';
         btn.style.background = '#059669';
         form.querySelectorAll('input, select').forEach((el) => {

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+declare global { interface Window { posthog?: { capture: (event: string, props?: Record<string, unknown>) => void; identify: (id: string, props?: Record<string, unknown>) => void; }; } }
+
 const personas = [
   {
     id: 'vp-sales',
@@ -128,7 +130,7 @@ export default function PersonaTabs() {
           {personas.map((persona, i) => (
             <button
               key={persona.id}
-              onClick={() => setActive(i)}
+              onClick={() => { setActive(i); window.posthog?.capture('persona_tab_viewed', { persona_id: persona.id, persona_label: persona.label }); }}
               className={`ptab-btn${i === active ? ' ptab-btn-active' : ''}`}
             >
               {persona.label}

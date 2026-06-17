@@ -140,4 +140,12 @@ const links = [
       menu.setAttribute('aria-hidden', 'true');
     });
   });
+
+  // Track nav CTA clicks
+  document.querySelectorAll('#nav a[href="#design-partner"]').forEach(a => {
+    a.addEventListener('click', () => {
+      const isMobile = (a as HTMLElement).closest('#mobile-menu') !== null;
+      window.posthog?.capture('nav_cta_clicked', { nav_type: isMobile ? 'mobile' : 'desktop' });
+    });
+  });
 </script>

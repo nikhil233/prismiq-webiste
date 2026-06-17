@@ -823,6 +823,8 @@ const pathD = (i: number) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email }),
         });
+        window.posthog?.identify(email, { email });
+        window.posthog?.capture('waitlist_signup_submitted', { email, source: 'hero' });
         btn.textContent = '✓ You\'re on the list!';
         btn.style.background = '#059669';
         (form.querySelector('.waitlist-input') as HTMLInputElement).value = '';
@@ -850,7 +852,7 @@ const pathD = (i: number) => {
     function start() { timer = setInterval(() => goTo(cur + 1), 3500); }
     function stop()  { if (timer) clearInterval(timer); }
 
-    dots.forEach((d, i) => d.addEventListener('click', () => { stop(); goTo(i); start(); }));
+    dots.forEach((d, i) => d.addEventListener('click', () => { stop(); goTo(i); start(); window.posthog?.capture('hero_carousel_interacted', { slide_index: i }); }));
     wrap.addEventListener('mouseenter', stop);
     wrap.addEventListener('mouseleave', start);
     start();
