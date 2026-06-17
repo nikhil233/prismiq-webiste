@@ -19,7 +19,7 @@ const personas = [
       'Forecast delta vs last week with signal-backed reasoning',
     ],
     metric: { num: '3.2h', label: 'saved per manager per week', sub: 'On pipeline review, forecast prep, and status calls' },
-    brief: ['4 deals need intervention this week', '₹1.8Cr at risk — 2 going cold', 'Forecast up ₹42L from last week'],
+    brief: ['4 deals need intervention this week', '₹1.8Cr at risk - 2 going cold', 'Forecast up ₹42L from last week'],
   },
   {
     id: 'revops',
@@ -35,8 +35,8 @@ const personas = [
     gets: [
       'Real-time signal coverage score per deal',
       'Auto-flagged CRM gaps: missing next step, silent deals, stale dates',
-      'Forecast built from CRM + call + email — not rep memory',
-      'Data quality trend report, updated every 6 hours',
+      'Forecast built from CRM + call + email - not rep memory',
+      'Data quality trend report, updated in real-time',
     ],
     metric: { num: '67%', label: 'reduction in forecast prep time', sub: 'From 4.5h to 1.5h per forecast cycle on average' },
     brief: ['11 deals missing next step', '3 close dates overdue by 7+ days', 'CRM data freshness: 94% this week'],
@@ -53,13 +53,13 @@ const personas = [
       'Discovering missed commitments only when the deal slips',
     ],
     gets: [
-      'Weekly rep scorecards — talk ratio, commitment rate, objection patterns',
+      'Weekly rep scorecards - talk ratio, commitment rate, objection patterns',
       'Auto-extracted coaching moments from every call',
       'Commitment tracking: what each rep owes each prospect',
       'Deal health per rep, ranked by urgency every morning',
     ],
     metric: { num: '4×', label: 'more deals coached per week', sub: 'Without adding time to 1:1s or listening to recordings' },
-    brief: ['Rohit: 3 overdue commitments', 'Kavya: talk ratio 78% — flag for coaching', '2 deals stalled 8+ days on your team'],
+    brief: ['Rohit: 3 overdue commitments', 'Kavya: talk ratio 78% - flag for coaching', '2 deals stalled 8+ days on your team'],
   },
   {
     id: 'ae',
@@ -75,11 +75,11 @@ const personas = [
     gets: [
       '60-second deal brief before every call, auto-generated',
       'Commitment tracker: what you owe, by when',
-      'Prospect sentiment trend — are they warming or cooling?',
+      'Prospect sentiment trend - are they warming or cooling?',
       'Suggested talking points based on last interaction and signals',
     ],
     metric: { num: '23%', label: 'higher close rate in pilot cohort', sub: 'Across 14 AEs over a 90-day pilot period' },
-    brief: ['Nexora call at 2pm — brief ready', '2 commitments due today', 'Indus Fintech: 8 days silent — re-engage now'],
+    brief: ['Nexora call at 2pm - brief ready', '2 commitments due today', 'Indus Fintech: 8 days silent - re-engage now'],
   },
   {
     id: 'ceo',
@@ -93,13 +93,13 @@ const personas = [
       'Discovering deal losses after the fact',
     ],
     gets: [
-      'Live pipeline confidence score — signal-backed, not rep-reported',
+      'Live pipeline confidence score - signal-backed, not rep-reported',
       'Risk-adjusted forecast: best case, likely, at-risk breakdown',
       'Deal velocity trends: is the quarter accelerating or stalling?',
       'Revenue at risk flagged 30+ days before quarter close',
     ],
     metric: { num: '±8%', label: 'forecast accuracy in early pilots', sub: 'vs industry average of ±35–40% without a signal layer' },
-    brief: ['Q2 forecast: ₹4.2Cr likely, ₹1.1Cr at risk', 'Pipeline velocity down 12% this week', '3 enterprise deals stalled — need exec touch'],
+    brief: ['Q2 forecast: ₹4.2Cr likely, ₹1.1Cr at risk', 'Pipeline velocity down 12% this week', '3 enterprise deals stalled - need exec touch'],
   },
 ];
 
@@ -120,7 +120,7 @@ export default function PersonaTabs() {
           <p style={{ fontSize: '1rem', color: '#94A3B8', margin: 0, lineHeight: 1.6 }}>Lumo delivers a different view to every revenue role - same data, right context.</p>
         </div>
 
-        {/* Tab shell — tabs + panel in one bordered unit */}
+        {/* Tab shell - tabs + panel in one bordered unit */}
         <div className="ptab-shell">
 
         {/* Tab bar */}

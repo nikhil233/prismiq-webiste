@@ -114,8 +114,7 @@ const pathD = (i: number) => {
           <div class="pulse-ring ring-3"></div>
           <div class="engine-card">
             <div class="engine-header">
-              <div class="engine-mark">LU</div>
-              <span class="engine-brand">Lumo</span>
+              <img src="/full-logo.svg" alt="Lumo" class="engine-full-logo" />
             </div>
             <div class="engine-orb">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -541,14 +540,8 @@ const pathD = (i: number) => {
     align-items: center;
     gap: 10px;
   }
-  .engine-header { display: flex; align-items: center; gap: 7px; }
-  .engine-mark {
-    width: 22px; height: 22px;
-    background: #1E40AF; border-radius: 6px;
-    color: white; font-size: 9px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .engine-brand { font-size: 12px; font-weight: 700; color: #1E40AF; }
+  .engine-header { display: flex; align-items: center; justify-content: center; }
+  .engine-full-logo { height: 22px; width: auto; display: block; }
   .engine-orb {
     background: #EFF6FF; border: 1.5px solid #BFDBFE;
     border-radius: 50%; width: 80px; height: 80px;
@@ -799,7 +792,7 @@ const pathD = (i: number) => {
 </style>
 
 <script>
-  // Lock waitlist form after its intro animation plays — prevents re-animation on focus/blur
+  // Lock waitlist form after its intro animation plays - prevents re-animation on focus/blur
   (() => {
     const form = document.querySelector('.hero-waitlist') as HTMLElement | null;
     if (!form) return;
